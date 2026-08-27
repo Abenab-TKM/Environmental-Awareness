@@ -1,0 +1,598 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ethiopian Wildlife</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f172a;
+            color: white;
+            padding: 30px 20px;
+        }
+
+        nav {
+            max-width: 900px;
+            margin: 0 auto 25px;
+            background: #1e293b;
+            border: 2px solid #334155;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px 12px;
+            border-radius: 8px;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        nav a:hover,
+        nav a:focus-visible,
+        nav a.active {
+            background: #0f766e;
+        }
+
+        nav a:focus-visible {
+            outline: 2px solid #38bdf8;
+            outline-offset: 2px;
+        }
+
+        .title {
+            text-align: center;
+            color: #38bdf8;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 32px;
+        }
+
+        .line {
+            width: 120px;
+            height: 5px;
+            background: #FFD400;
+            margin: auto;
+            border-radius: 20px;
+        }
+
+        .intro {
+            max-width: 900px;
+            margin: 25px auto;
+            text-align: center;
+            color: #cbd5e1;
+            line-height: 1.7;
+            font-size: 17px;
+        }
+
+        .grid {
+            max-width: 1200px;
+            margin: 50px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+            transition: .3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #38bdf8;
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card .content {
+            padding: 20px;
+        }
+
+        .card .content h3 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .card .content p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .location {
+            color: #cbd5e1 !important;
+            font-size: 14px;
+        }
+
+        .card-button {
+            display: inline-block;
+            background-color: #0f766e;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .card-button:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+
+        .back {
+            display: block;
+            width: fit-content;
+            margin: 10px auto 30px;
+            padding: 10px 18px;
+            background: #0f766e;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+
+        .back:hover {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <nav aria-label="Main navigation">
+
+        <ul>
+
+            <li>
+                <a href="Wildlife.html">Home</a>
+            </li>
+
+            <li>
+                <a href="endangered.html">Endangered</a>
+            </li>
+
+            <li>
+                <a href="protected.html">Protected Areas</a>
+            </li>
+
+            <li>
+                <a href="ethiopian-wildlife.html" class="active">
+                    Ethiopian Wildlife
+                </a>
+            </li>
+
+            <li>
+                <a href="endemic.html">Endemic</a>
+            </li>
+
+            <li>
+                <a href="protect-animals.html">Protect Animals</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+    <h2 class="title">Ethiopian Wildlife</h2>
+
+    <div class="line"></div>
+
+
+    <p class="intro">
+
+        Ethiopia has a remarkable variety of wildlife because of its
+        mountains, forests, grasslands, wetlands, and deserts.
+        The country is home to mammals, birds, reptiles, and many
+        other species. Explore some of Ethiopia's amazing wildlife below.
+
+    </p>
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <img
+                src="https://tse4.mm.bing.net/th/id/OIP.Z2_QXZbjnj4-F8bYLT1y4gHaFA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                alt="Ethiopian Wolf">
+
+            <div class="content">
+
+                <h3>Ethiopian Wolf</h3>
+
+                <p>
+                    The Ethiopian wolf is one of the most famous animals
+                    in Ethiopia. It is specially adapted to high-altitude
+                    grasslands and feeds mainly on small mammals.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Bale Mountains,
+                    Simien Mountains and Ethiopian Highlands
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://tse2.mm.bing.net/th/id/OIP.R8403bDe3WMt8eGDxtkrTgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                alt="Walia Ibex">
+
+            <div class="content">
+
+                <h3>Walia Ibex</h3>
+
+                <p>
+                    The Walia ibex is a mountain goat with large curved
+                    horns. It is one of Ethiopia's best-known wildlife
+                    species and lives among steep mountain cliffs.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Simien Mountains
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://th.bing.com/th/id/R.f5c07222d93158bc4b1cbb9f8c9c1a6d?rik=Wprwzeit0dk2Vw&pid=ImgRaw&r=0"
+                alt="Mountain Nyala">
+
+            <div class="content">
+
+                <h3>Mountain Nyala</h3>
+
+                <p>
+                    The mountain nyala is a large antelope with
+                    impressive horns. It lives in Ethiopia's
+                    highland forests and grasslands.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Bale and Arsi Mountains
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://thumbs.dreamstime.com/b/male-gelada-theropithecus-gelada-hairy-primate-face-expression-male-gelada-theropithecus-gelada-hairy-primate-face-expression-al-361764212.jpg"
+                alt="Gelada">
+
+            <div class="content">
+
+                <h3>Gelada</h3>
+
+                <p>
+                    The gelada is a grass-eating primate found in the
+                    Ethiopian Highlands. It is recognized by the red
+                    patch on its chest and its social groups.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Simien Mountains
+                    and Ethiopian Highlands
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://www.thoughtco.com/thmb/onAgRak2RCAfoE2uPDezez2OIKY=/5600x3733/filters:fill(auto,1)/wild-dog---laycaon-pictus---a-young-pup-485205975-5b3b502646e0fb0037cc1d79.jpg"
+                alt="African Wild Dog">
+
+            <div class="content">
+
+                <h3>African Wild Dog</h3>
+
+                <p>
+                    The African wild dog is a social predator that
+                    lives in groups. It has a distinctive coat pattern
+                    and requires large areas of suitable habitat.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Bale Mountains
+                    and other suitable areas
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://animalfactguide.com/wp-content/uploads/2024/10/colobus-monkey1-725x560.jpg"
+                alt="Black and White Colobus Monkey">
+
+            <div class="content">
+
+                <h3>Black-and-white Colobus</h3>
+
+                <p>
+                    The black-and-white colobus is a forest-dwelling
+                    monkey with striking black and white fur. It spends
+                    much of its time in trees.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Ethiopian forests
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://tse3.mm.bing.net/th/id/OIP.F6L4QZYArku3VD4i7yvhhQHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                alt="Olive Baboon">
+
+            <div class="content">
+
+                <h3>Olive Baboon</h3>
+
+                <p>
+                    Olive baboons are adaptable primates that live in
+                    different environments. They are social animals
+                    that live in groups called troops.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Forests, grasslands
+                    and savannas of Ethiopia
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://img.freepik.com/premium-photo/lion-african-savannah_1132842-2395.jpg"
+                alt="African Lion">
+
+            <div class="content">
+
+                <h3>African Lion</h3>
+
+                <p>
+                    Lions are powerful predators found in parts of
+                    Ethiopia. They live in groups and play an important
+                    role in maintaining the balance of ecosystems.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Grasslands,
+                    savannas and protected areas
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://dinoanimals.com/wp-content/uploads/2023/01/African-forest-elephant-1.jpg"
+                alt="African Elephant">
+
+            <div class="content">
+
+                <h3>African Elephant</h3>
+
+                <p>
+                    African elephants are the largest land animals.
+                    They help shape ecosystems by feeding on vegetation
+                    and creating pathways through their habitats.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> National parks,
+                    forests and savanna regions
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://th.bing.com/th/id/R.55c68fedfdbc92300a5bc2fdf0983240?rik=USkI5fqW4qrnVg&riu=http%3a%2f%2f1.bp.blogspot.com%2f-zaWv88KSU3Y%2fUR4JokSKeAI%2fAAAAAAAADqY%2fr8AJllJC5b0%2fs1600%2fThe%2bhippopotamus-04.jpg&ehk=JzKfPSnwvl11dj7hI8hJpSxU58GK6T%2bnNqPKdriHTEc%3d&risl=&pid=ImgRaw&r=0"
+                alt="Hippopotamus">
+
+            <div class="content">
+
+                <h3>Hippopotamus</h3>
+
+                <p>
+                    Hippopotamuses spend much of their time in rivers
+                    and lakes. They are important parts of freshwater
+                    ecosystems in areas where they occur.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Rivers and lakes
+                    including areas around Lake Tana
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://tse2.mm.bing.net/th/id/OIP.XGe3E4USgh3aunxDKAoGxQHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                alt="Nile Crocodile">
+
+            <div class="content">
+
+                <h3>Nile Crocodile</h3>
+
+                <p>
+                    The Nile crocodile is a large freshwater reptile.
+                    It is a powerful predator that lives near rivers,
+                    lakes, and wetlands.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Rivers, lakes and
+                    wetlands of Ethiopia
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <img
+                src="https://tse2.mm.bing.net/th/id/OIP._cBCDZ9o3HK703MAuRZQQgHaEn?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                alt="Secretary Bird">
+
+            <div class="content">
+
+                <h3>Secretary Bird</h3>
+
+                <p>
+                    The secretary bird is a tall bird of prey that
+                    hunts on the ground. It is recognized by its long
+                    legs and distinctive crest of feathers.
+                </p>
+
+                <p class="location">
+                    <strong>Location:</strong> Grasslands and
+                    open habitats
+                </p>
+
+                <button class="card-button">
+                    Learn More
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <a class="back" href="Wildlife.html">
+        ← Back to Wildlife
+    </a>
+
+</body>
+
+</html>

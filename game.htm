@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2D Stickman Fighter - Ultimate Arcade FX Edition</title>
+  <style>
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    body {
+      background: #030712;
+      color: #f8fafc;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: radial-gradient(circle, rgba(13, 148, 136, 0.1) 1px, transparent 1px);
+      background-size: 32px 32px;
+      transform: rotate(15deg);
+      animation: bgGridMove 30s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes bgGridMove {
+      0% { transform: rotate(15deg) translateY(0); }
+      100% { transform: rotate(15deg) translateY(320px); }
+    }
+
+    /* Animated Neon Header */
+    h1 {
+      margin-bottom: 12px;
+      font-size: 2.2rem;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc, #38bdf8);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: headerGlow 4s linear infinite;
+    }
+
+    @keyframes headerGlow {
+      0% { background-position: 0% center; }
+      100% { background-position: 300% center; }
+    }
+
+    /* Game Canvas Container */
+    .canvas-container {
+      position: relative;
+      border-radius: 12px;
+      padding: 4px;
+      background: linear-gradient(135deg, #0d9488, #3b82f6, #8b5cf6);
+      background-size: 200% 200%;
+      animation: borderShift 6s ease infinite;
+      box-shadow: 0 0 35px rgba(13, 148, 136, 0.35), 0 20px 40px rgba(0, 0, 0, 0.8);
+    }
+
+    @keyframes borderShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    canvas {
+      display: block;
+      background: #0b1329;
+      border-radius: 8px;
+    }
+
+    /* Controls UI Card */
+    .controls-card {
+      margin-top: 18px;
+      background: rgba(30, 41, 59, 0.85);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-size: 0.9rem;
+      color: #cbd5e1;
+      text-align: center;
+      line-height: 1.8;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      animation: cardPulse 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes cardPulse {
+      0% { box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+      100% { box-shadow: 0 8px 30px rgba(56, 189, 248, 0.2); }
+    }
+
+    kbd {
+      background: #334155;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: #38bdf8;
+      font-family: monospace;
+      font-weight: bold;
+      border-bottom: 2px solid #0f172a;
+      display: inline-block;
+      transition: transform 0.1s ease;
+    }
+
+    .key-ultra {
+      color: #f59e0b;
+      animation: keyFlash 1s infinite alternate;
+    }
+
+    @keyframes keyFlash {
+      0% { text-shadow: 0 0 2px #f59e0b; }
+      100% { text-shadow: 0 0 8px #f59e0b; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Stickman Fighter FX</h1>
+
+  <div class="canvas-container">
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+  </div>
+  
+  <div class="controls-card">
+    <strong>Movement:</strong> <kbd>A</kbd>/<kbd>D</kbd> Move &nbsp;|&nbsp; <kbd>W</kbd> Jump &nbsp;|&nbsp; <kbd>S</kbd> Block &nbsp;|&nbsp; <kbd>K</kbd> Dodge Slide <br/>
+    <strong>Attacks:</strong> <kbd>J</kbd> Punch &nbsp;|&nbsp; <kbd>U</kbd> Kick &nbsp;|&nbsp; <kbd>I</kbd> Uppercut &nbsp;|&nbsp; <kbd>L</kbd> Cyclone Kick &nbsp;|&nbsp; <kbd class="key-ultra">O</kbd> Ultra Beam (100% Super)
+  </div>
+
+<script>
+/* ==========================================================
+   2. CANVAS GAME ENGINE, PHYSICS & FX ANIMATIONS (JAVASCRIPT)
+   ========================================================== */
+
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+
+let particles = [];
+let shockwaves = [];
+let floatingTexts = [];
+let afterimages = [];
+let groundCracks = [];
+let beams = [];
+let screenShake = 0;
+let hitFreezeTimer = 0;
+let flashBackground = false;
+let slowMoFactor = 1;
+let koTriggered = false;
+
+// Dynamic Camera System
+let camera = { x: 400, y: 200, zoom: 1, targetZoom: 1, targetX: 400, targetY: 200 };
+
+// Particle Engine
+function spawnParticles(x, y, color, count = 10, speedMult = 1) {
+  for (let i = 0; i < count; i++) {
+    const angle = Math.random() * Math.PI * 2;
+    const speed = (Math.random() * 7 + 2) * speedMult;
+    particles.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      size: Math.random() * 5 + 2,
+      color,
+      life: 1,
+      decay: Math.random() * 0.04 + 0.02
+    });
+  }
+}
+
+// Shockwave Ring Animation Engine
+function spawnShockwave(x, y, color = '#38bdf8', maxRadius = 80) {
+  shockwaves.push({ x, y, radius: 5, maxRadius, color, alpha: 1, lineWidth: 6 });
+}
+
+// Stage Floor Cracks Physics Engine
+function spawnGroundCrack(x) {
+  groundCracks.push({
+    x,
+    points: [
+      {x: 0, y: 0},
+      {x: (Math.random() - 0.5) * 20, y: 8},
+      {x: (Math.random() - 0.5) * 35, y: 16},
+      {x: (Math.random() - 0.5) * 50, y: 22}
+    ],
+    alpha: 1,
+    decay: 0.005
+  });
+}
+
+// Floating Damage & Combat Text Engine
+function spawnFloatingText(x, y, text, color = '#facc15') {
+  floatingTexts.push({
+    x: x + (Math.random() - 0.5) * 20,
+    y: y - 20,
+    text, color, alpha: 1, vy: -2.5, scale: 1.4
+  });
+}
+
+// Dash Motion Blur / Afterimage Engine
+function addAfterimage(stickman) {
+  afterimages.push({
+    x: stickman.x,
+    y: stickman.y,
+    scaleX: stickman.scaleX,
+    scaleY: stickman.scaleY,
+    facing: stickman.facing,
+    color: stickman.color,
+    state: stickman.state,
+    animTimer: stickman.animTimer,
+    alpha: 0.5
+  });
+}
+
+// User Key Input Listener
+const keys = {};
+window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
+window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
+
+const GROUND_Y = 320;
+let gameOverTimer = 0;
+let roundCount = 1;
+
+// --- Stickman Fighter Engine Class ---
+class Stickman {
+  constructor(x, color, isAI = false) {
+    this.startX = x;
+    this.color = color;
+    this.isAI = isAI;
+    
+    // Multi-Joint Scarf Physics Dynamics
+    this.scarf = [
+      {x: x, y: GROUND_Y - 55},
+      {x: x - 10, y: GROUND_Y - 50},
+      {x: x - 20, y: GROUND_Y - 45},
+      {x: x - 30, y: GROUND_Y - 40}
+    ];
+
+    this.reset();
+  }
+
+  reset() {
+    this.x = this.startX;
+    this.y = GROUND_Y;
+    this.vx = 0;
+    this.vy = 0;
+    this.hp = 100;
+    this.superGauge = 50; 
+    this.facing = this.isAI ? -1 : 1;
+    this.state = 'idle'; 
+    this.animTimer = 0;
+    this.attackCooldown = 0;
+    this.hitStun = 0;
+    this.dodgeTimer = 0;
+    
+    this.scaleX = 1;
+    this.scaleY = 1;
+  }
+
+  update(enemy) {
+    this.animTimer += 0.18;
+    if (this.attackCooldown > 0) this.attackCooldown--;
+
+    // Elastic Squash & Stretch Recovery
+    this.scaleX += (1 - this.scaleX) * 0.2;
+    this.scaleY += (1 - this.scaleY) * 0.2;
+
+    this.updateScarf();
+
+    if (this.hp <= 0) {
+      this.state = 'dead';
+      return;
+    }
+
+    if (enemy.hp <= 0 && this.y === GROUND_Y) {
+      this.state = 'taunt';
+    }
+
+    if (this.hitStun > 0) {
+      this.hitStun--;
+      this.state = 'hit';
+      return;
+    }
+
+    if (this.dodgeTimer > 0) {
+      this.dodgeTimer--;
+      this.x += this.facing * 9;
+      this.state = 'dodge';
+      if (this.dodgeTimer % 2 === 0) addAfterimage(this);
+      spawnParticles(this.x, GROUND_Y, '#f59e0b', 2);
+      if (this.dodgeTimer === 0) this.state = 'idle';
+      return;
+    }
+
+    // Gravity Physics Engine
+    const wasInAir = this.y < GROUND_Y;
+    this.vy += 0.8;
+    this.y += this.vy;
+    
+    if (this.y >= GROUND_Y) {
+      this.y = GROUND_Y;
+      this.vy = 0;
+      if (wasInAir) {
+        this.scaleX = 1.3;
+        this.scaleY = 0.7;
+        spawnParticles(this.x, GROUND_Y, '#64748b', 12);
+        spawnShockwave(this.x, GROUND_Y, '#334155', 30);
+      }
+    }
+
+    if (this.isAI) {
+      this.updateAI(enemy);
+    } else {
+      this.updatePlayerControls(enemy);
+    }
+
+    // Stage Bounds Clamp
+    this.x = Math.max(30, Math.min(canvas.width - 30, this.x));
+  }
+
+  updateScarf() {
+    const headX = this.x - this.facing * 8;
+    const headY = this.y - 50;
+
+    this.scarf[0].x = headX;
+    this.scarf[0].y = headY;
+
+    for (let i = 1; i < this.scarf.length; i++) {
+      const prev = this.scarf[i - 1];
+      const current = this.scarf[i];
+      
+      const targetX = prev.x - this.facing * 8 - this.vx * 1.5;
+      const targetY = prev.y + 2 + Math.sin(this.animTimer + i) * 2;
+
+      current.x += (targetX - current.x) * 0.45;
+      current.y += (targetY - current.y) * 0.45;
+    }
+  }
+
+  updatePlayerControls(enemy) {
+    if (['punch', 'kick', 'uppercut', 'special', 'ultra'].includes(this.state)) return;
+
+    this.vx = 0;
+
+    if (keys['s'] && this.y === GROUND_Y) {
+      this.state = 'block';
+      this.scaleX = 1.1; this.scaleY = 0.9;
+      return;
+    }
+
+    if (keys['a']) { this.vx = -4.5; this.facing = -1; }
+    if (keys['d']) { this.vx = 4.5; this.facing = 1; }
+
+    this.x += this.vx;
+
+    if (keys['w'] && this.y === GROUND_Y) {
+      this.vy = -13;
+      this.scaleX = 0.7; this.scaleY = 1.3;
+      spawnParticles(this.x, GROUND_Y, '#64748b', 8);
+    }
+
+    if (keys['k'] && this.dodgeTimer === 0 && this.y === GROUND_Y) {
+      this.dodgeTimer = 16;
+      this.scaleX = 1.4; this.scaleY = 0.6;
+    }
+
+    // Attacks & Combos
+    if (this.attackCooldown === 0) {
+      if (keys['j']) this.performAttack(enemy, 'punch');
+      else if (keys['u']) this.performAttack(enemy, 'kick');
+      else if (keys['i']) this.performAttack(enemy, 'uppercut');
+      else if (keys['l']) this.performAttack(enemy, 'special');
+      else if (keys['o'] && this.superGauge >= 100) this.performUltraBeam(enemy);
+    }
+
+    if (this.y < GROUND_Y) {
+      this.state = 'jump';
+    } else if (Math.abs(this.vx) > 0) {
+      this.state = 'run';
+    } else if (this.state !== 'dodge' && this.state !== 'taunt') {
+      this.state = 'idle';
+    }
+  }
+
+  updateAI(enemy) {
+    if (this.state === 'taunt') return;
+    const dist = enemy.x - this.x;
+    this.facing = dist > 0 ? 1 : -1;
+
+    if (Math.abs(dist) > 60) {
+      this.x += this.facing * 2.8;
+      this.state = this.y < GROUND_Y ? 'jump' : 'run';
+    } else {
+      this.state = 'idle';
+      if (this.attackCooldown === 0 && Math.random() < 0.08) {
+        if (this.superGauge >= 100 && Math.random() < 0.4) {
+          this.performUltraBeam(enemy);
+        } else {
+          const moves = ['punch', 'kick', 'uppercut', 'special'];
+          this.performAttack(enemy, moves[Math.floor(Math.random() * moves.length)]);
+        }
+      } else if (Math.random() < 0.03) {
+        this.state = 'block';
+      }
+    }
+
+    if (Math.random() < 0.006 && this.y === GROUND_Y) {
+      this.vy = -13;
+      this.scaleX = 0.7; this.scaleY = 1.3;
+    }
+  }
+
+  performAttack(enemy, type) {
+    this.state = type;
+    let damage = 10, range = 65, cooldown = 20, duration = 200;
+
+    if (type === 'kick') {
+      damage = 15; range = 75; cooldown = 30; duration = 250;
+      this.scaleX = 1.2;
+    } else if (type === 'uppercut') {
+      damage = 22; range = 60; cooldown = 40; duration = 300;
+      this.scaleY = 1.3;
+    } else if (type === 'special') {
+      damage = 28; range = 95; cooldown = 60; duration = 400;
+      this.vy = -6.5;
+      spawnShockwave(this.x, this.y - 30, '#a855f7', 100);
+    }
+
+    this.attackCooldown = cooldown;
+
+    const hitX = this.x + this.facing * (range * 0.6);
+    const distance = Math.abs(hitX - enemy.x);
+
+    if (distance < range && Math.abs(this.y - enemy.y) < 50 && enemy.state !== 'dodge') {
+      let isBlocked = enemy.state === 'block' && enemy.facing !== this.facing;
+      let finalDamage = isBlocked ? Math.floor(damage * 0.2) : damage;
+      
+      this.superGauge = Math.min(100, this.superGauge + 15);
+      enemy.takeDamage(finalDamage, this.facing, type === 'uppercut' || type === 'special');
+
+      if (isBlocked) {
+        spawnFloatingText(enemy.x, enemy.y - 40, 'BLOCKED!', '#38bdf8');
+        spawnParticles(enemy.x, enemy.y - 35, '#38bdf8', 6);
+      } else {
+        const text = type === 'special' ? 'CYCLONE!' : type === 'uppercut' ? 'CRIT!' : `-${finalDamage}`;
+        spawnFloatingText(enemy.x, enemy.y - 40, text, type === 'special' ? '#a855f7' : '#facc15');
+        spawnParticles(enemy.x, enemy.y - 35, '#facc15', type === 'special' ? 22 : 12, 1.5);
+        spawnShockwave(enemy.x, enemy.y - 30, '#ef4444', 50);
+
+        if (type === 'uppercut' || type === 'special') {
+          spawnGroundCrack(enemy.x);
+        }
+
+        hitFreezeTimer = type === 'special' ? 8 : 4;
+        flashBackground = type === 'special' || type === 'uppercut';
+        screenShake = type === 'special' ? 16 : 9;
+      }
+    }
+
+    setTimeout(() => {
+      if (['punch', 'kick', 'uppercut', 'special'].includes(this.state)) this.state = 'idle';
+    }, duration);
+  }
+
+  performUltraBeam(enemy) {
+    this.state = 'ultra';
+    this.superGauge = 0;
+    this.attackCooldown = 90;
+    screenShake = 25;
+    hitFreezeTimer = 10;
+    flashBackground = true;
+
+    beams.push({
+      x: this.x + this.facing * 30,
+      y: this.y - 42,
+      facing: this.facing,
+      width: 0,
+      maxHeight: 50,
+      color: this.color,
+      life: 1
+    });
+
+    const hitBoxWidth = 500;
+    const isEnemyInBeam = (this.facing === 1 && enemy.x > this.x && enemy.x < this.x + hitBoxWidth) ||
+                          (this.facing === -1 && enemy.x < this.x && enemy.x > this.x - hitBoxWidth);
+
+    if (isEnemyInBeam && Math.abs(this.y - enemy.y) < 60) {
+      enemy.takeDamage(40, this.facing, true);
+      spawnFloatingText(enemy.x, enemy.y - 50, 'ULTRA BEAM!', '#38bdf8');
+      spawnParticles(enemy.x, enemy.y - 30, '#38bdf8', 35, 2);
+      spawnGroundCrack(enemy.x);
+    }
+
+    setTimeout(() => {
+      if (this.state === 'ultra') this.state = 'idle';
+    }, 600);
+  }
+
+  takeDamage(amount, direction, launcher = false) {
+    this.hp = Math.max(0, this.hp - amount);
+    this.hitStun = 15;
+    this.x += direction * 22;
+    this.scaleX = 0.6; this.scaleY = 1.4;
+
+    if (this.hp <= 0 && !koTriggered) {
+      koTriggered = true;
+      slowMoFactor = 0.2; // Trigger K.O. Cinematic Slow-Motion
+      screenShake = 30;
+      setTimeout(() => slowMoFactor = 1, 1200);
+    }
+
+    if (launcher) {
+      this.vy = -9.5;
+    }
+  }
+
+  draw(overrideContext = ctx, customColor = null, customAlpha = 1) {
+    const c = overrideContext;
+    c.save();
+    c.translate(this.x, this.y);
+    c.scale(this.scaleX, this.scaleY);
+    c.globalAlpha = customAlpha;
+
+    c.strokeStyle = customColor || (this.hitStun > 0 ? '#ef4444' : this.color);
+    c.lineWidth = 4;
+    c.lineCap = 'round';
+    c.lineJoin = 'round';
+
+    const t = this.animTimer;
+    const f = this.facing;
+
+    // --- Scarf Rendering ---
+    c.save();
+    c.strokeStyle = '#ef4444';
+    c.lineWidth = 3;
+    c.beginPath();
+    c.moveTo(this.scarf[0].x - this.x, this.scarf[0].y - this.y);
+    for (let i = 1; i < this.scarf.length; i++) {
+      c.lineTo(this.scarf[i].x - this.x, this.scarf[i].y - this.y);
+    }
+    c.stroke();
+    c.restore();
+
+    if (this.state === 'dead') {
+      c.beginPath();
+      c.arc(20 * f, -8, 9, 0, Math.PI * 2);
+      c.moveTo(10 * f, -8); c.lineTo(-20 * f, -8);
+      c.moveTo(-20 * f, -8); c.lineTo(-35 * f, -4);
+      c.stroke();
+    } 
+    else if (this.state === 'dodge') {
+      c.rotate((t * 3) * f);
+      c.beginPath();
+      c.arc(0, -20, 9, 0, Math.PI * 2);
+      c.moveTo(0, -11); c.lineTo(0, 10);
+      c.stroke();
+    }
+    else {
+      let headY = -55, hipY = -25;
+      let leftKnee = {x: -8, y: -12}, rightKnee = {x: 8, y: -12};
+      let leftFoot = {x: -12, y: 0}, rightFoot = {x: 12, y: 0};
+      let leftElbow = {x: -8 * f, y: -40}, rightElbow = {x: 8 * f, y: -40};
+      let leftHand = {x: -12 * f, y: -30}, rightHand = {x: 12 * f, y: -30};
+
+      if (this.state === 'idle') {
+        headY += Math.sin(t) * 2.5;
+      } 
+      else if (this.state === 'run') {
+        const legSway = Math.sin(t * 2.2);
+        leftFoot = {x: legSway * 18, y: Math.max(0, -legSway * 10)};
+        rightFoot = {x: -legSway * 18, y: Math.max(0, legSway * 10)};
+        leftKnee = {x: leftFoot.x * 0.5, y: -14 + Math.abs(legSway) * 4};
+        rightKnee = {x: rightFoot.x * 0.5, y: -14 + Math.abs(legSway) * 4};
+
+        leftHand = {x: -legSway * 15 * f, y: -35};
+        rightHand = {x: legSway * 15 * f, y: -35};
+      } 
+      else if (this.state === 'jump') {
+        leftKnee = {x: -12, y: -18}; leftFoot = {x: -8, y: -8};
+        rightKnee = {x: 12, y: -18}; rightFoot = {x: 8, y: -8};
+        leftHand = {x: -18 * f, y: -50}; rightHand = {x: 18 * f, y: -50};
+      } 
+      else if (this.state === 'block') {
+        leftElbow = {x: 10 * f, y: -45}; leftHand = {x: 8 * f, y: -55};
+        rightElbow = {x: 14 * f, y: -40}; rightHand = {x: 12 * f, y: -50};
+      } 
+      else if (this.state === 'punch') {
+        rightElbow = {x: 22 * f, y: -42}; rightHand = {x: 40 * f, y: -42};
+      } 
+      else if (this.state === 'kick') {
+        rightKnee = {x: 20 * f, y: -28}; rightFoot = {x: 44 * f, y: -30};
+      } 
+      else if (this.state === 'uppercut') {
+        rightElbow = {x: 18 * f, y: -50}; rightHand = {x: 25 * f, y: -72};
+      }
+      else if (this.state === 'special') {
+        c.rotate((t * 4));
+        rightKnee = {x: 25 * f, y: -20}; rightFoot = {x: 45 * f, y: -20};
+        leftHand = {x: -25 * f, y: -40}; rightHand = {x: 25 * f, y: -40};
+        if (Math.random() < 0.5) addAfterimage(this);
+      }
+      else if (this.state === 'ultra') {
+        leftHand = {x: 25 * f, y: -42};
+        rightHand = {x: 30 * f, y: -42};
+      }
+      else if (this.state === 'taunt') {
+        leftHand = {x: -18 * f, y: -65};
+        rightHand = {x: 18 * f, y: -65};
+        headY += Math.sin(t * 3) * 3;
+      }
+
+      // Head
+      c.beginPath();
+      c.arc(0, headY, 10, 0, Math.PI * 2);
+      c.stroke();
+
+      // Torso
+      c.beginPath();
+      c.moveTo(0, headY + 10);
+      c.lineTo(0, hipY);
+      c.stroke();
+
+      // Left Leg
+      c.beginPath();
+      c.moveTo(0, hipY);
+      c.lineTo(leftKnee.x, leftKnee.y);
+      c.lineTo(leftFoot.x, leftFoot.y);
+      c.stroke();
+
+      // Right Leg
+      c.beginPath();
+      c.moveTo(0, hipY);
+      c.lineTo(rightKnee.x, rightKnee.y);
+      c.lineTo(rightFoot.x, rightFoot.y);
+      c.stroke();
+
+      // Left Arm
+      c.beginPath();
+      c.moveTo(0, headY + 12);
+      c.lineTo(leftElbow.x, leftElbow.y);
+      c.lineTo(leftHand.x, leftHand.y);
+      c.stroke();
+
+      // Right Arm
+      c.beginPath();
+      c.moveTo(0, headY + 12);
+      c.lineTo(rightElbow.x, rightElbow.y);
+      c.lineTo(rightHand.x, rightHand.y);
+      c.stroke();
+    }
+
+    c.restore();
+  }
+
+  drawShadow() {
+    ctx.save();
+    const shadowScale = Math.max(0.2, 1 - Math.abs(this.y - GROUND_Y) / 200);
+    ctx.translate(this.x, GROUND_Y + 2);
+    ctx.scale(shadowScale, 0.2);
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+    ctx.beginPath();
+    ctx.arc(0, 0, 25, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// Initialize Players
+let player = new Stickman(200, '#38bdf8', false);
+let enemy = new Stickman(600, '#ef4444', true);
+
+function resetGame() {
+  player.reset();
+  enemy.reset();
+  gameOverTimer = 0;
+  roundCount++;
+  koTriggered = false;
+  slowMoFactor = 1;
+  camera.targetZoom = 1;
+  camera.targetX = 400;
+  camera.targetY = 200;
+}
+
+function updateAndDrawEffects() {
+  // Beams
+  for (let i = beams.length - 1; i >= 0; i--) {
+    let b = beams[i];
+    b.width += 40;
+    b.life -= 0.05;
+    if (b.life <= 0) { beams.splice(i, 1); continue; }
+
+    ctx.save();
+    ctx.globalAlpha = b.life;
+    ctx.fillStyle = b.color;
+    ctx.shadowColor = b.color;
+    ctx.shadowBlur = 20;
+    ctx.fillRect(b.facing === 1 ? b.x : b.x - b.width, b.y - b.maxHeight / 2, b.width, b.maxHeight);
+    ctx.restore();
+  }
+
+  // Cracks
+  for (let i = groundCracks.length - 1; i >= 0; i--) {
+    let gc = groundCracks[i];
+    gc.alpha -= gc.decay;
+    if (gc.alpha <= 0) { groundCracks.splice(i, 1); continue; }
+
+    ctx.save();
+    ctx.globalAlpha = gc.alpha;
+    ctx.strokeStyle = '#ef4444';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(gc.x, GROUND_Y + 2);
+    gc.points.forEach(p => ctx.lineTo(gc.x + p.x, GROUND_Y + 2 + p.y));
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Shockwaves
+  for (let i = shockwaves.length - 1; i >= 0; i--) {
+    let sw = shockwaves[i];
+    sw.radius += 4;
+    sw.alpha -= 0.04;
+    if (sw.alpha <= 0) { shockwaves.splice(i, 1); continue; }
+
+    ctx.save();
+    ctx.globalAlpha = sw.alpha;
+    ctx.strokeStyle = sw.color;
+    ctx.lineWidth = sw.lineWidth;
+    ctx.beginPath();
+    ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Afterimages
+  for (let i = afterimages.length - 1; i >= 0; i--) {
+    let ghost = afterimages[i];
+    ghost.alpha -= 0.06;
+    if (ghost.alpha <= 0) { afterimages.splice(i, 1); continue; }
+    ctx.save();
+    ctx.translate(ghost.x, ghost.y);
+    ctx.scale(ghost.scaleX, ghost.scaleY);
+    ctx.globalAlpha = ghost.alpha;
+    ctx.strokeStyle = ghost.color;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(0, -55, 10, 0, Math.PI * 2);
+    ctx.moveTo(0, -45); ctx.lineTo(0, -25);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Particles
+  for (let i = particles.length - 1; i >= 0; i--) {
+    let p = particles[i];
+    p.x += p.vx; p.y += p.vy;
+    p.life -= p.decay;
+    if (p.life <= 0) { particles.splice(i, 1); continue; }
+
+    ctx.save();
+    ctx.globalAlpha = p.life;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }
+
+  // Floating Damage Numbers
+  for (let i = floatingTexts.length - 1; i >= 0; i--) {
+    let ft = floatingTexts[i];
+    ft.y += ft.vy;
+    ft.alpha -= 0.02;
+    if (ft.alpha <= 0) { floatingTexts.splice(i, 1); continue; }
+
+    ctx.save();
+    ctx.globalAlpha = ft.alpha;
+    ctx.fillStyle = ft.color;
+    ctx.font = 'bold 20px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(ft.text, ft.x, ft.y);
+    ctx.restore();
+  }
+}
+
+function drawHUD() {
+  ctx.save();
+  // Health Bars
+  ctx.fillStyle = '#1e293b';
+  ctx.fillRect(30, 20, 250, 18);
+  ctx.fillStyle = '#38bdf8';
+  ctx.fillRect(30, 20, (player.hp / 100) * 250, 18);
+
+  ctx.fillStyle = '#1e293b';
+  ctx.fillRect(520, 20, 250, 18);
+  ctx.fillStyle = '#ef4444';
+  ctx.fillRect(520, 20, (enemy.hp / 100) * 250, 18);
+
+  // Super Gauge Bars
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(30, 42, 250, 8);
+  ctx.fillStyle = player.superGauge >= 100 ? '#f59e0b' : '#a855f7';
+  ctx.fillRect(30, 42, (player.superGauge / 100) * 250, 8);
+
+  ctx.fillStyle = '#0f172a';
+  ctx.fillRect(520, 42, 250, 8);
+  ctx.fillStyle = enemy.superGauge >= 100 ? '#f59e0b' : '#a855f7';
+  ctx.fillRect(520, 42, (enemy.superGauge / 100) * 250, 8);
+
+  // Round Indicator
+  ctx.fillStyle = '#f8fafc';
+  ctx.font = 'bold 16px sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText(`ROUND ${roundCount}`, canvas.width / 2, 35);
+
+  // Ground Line Glow
+  ctx.strokeStyle = '#0d9488';
+  ctx.shadowColor = '#14b8a6';
+  ctx.shadowBlur = 12;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(0, GROUND_Y + 2);
+  ctx.lineTo(canvas.width, GROUND_Y + 2);
+  ctx.stroke();
+  ctx.restore();
+}
+
+// Main Animation & Render Loop
+function gameLoop() {
+  if (hitFreezeTimer > 0) {
+    hitFreezeTimer--;
+    requestAnimationFrame(gameLoop);
+    return;
+  }
+
+  camera.zoom += (camera.targetZoom - camera.zoom) * 0.08;
+  camera.x += (camera.targetX - camera.x) * 0.08;
+  camera.y += (camera.targetY - camera.y) * 0.08;
+
+  ctx.save();
+
+  if (screenShake > 0) {
+    ctx.translate((Math.random() - 0.5) * screenShake, (Math.random() - 0.5) * screenShake);
+    screenShake *= 0.85;
+    if (screenShake < 0.5) screenShake = 0;
+  }
+
+  ctx.translate(canvas.width / 2, canvas.height / 2);
+  ctx.scale(camera.zoom, camera.zoom);
+  ctx.translate(-camera.x, -camera.y);
+
+  if (flashBackground) {
+    ctx.fillStyle = '#f8fafc';
+    flashBackground = false;
+  } else {
+    ctx.fillStyle = '#0b1329';
+  }
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  if (player.hp <= 0 || enemy.hp <= 0) {
+    if (gameOverTimer === 0) gameOverTimer = 180;
+    gameOverTimer--;
+
+    const winner = player.hp > 0 ? player : enemy;
+    camera.targetZoom = 1.35;
+    camera.targetX = winner.x;
+    camera.targetY = winner.y - 40;
+
+    ctx.fillStyle = '#f8fafc';
+    ctx.font = 'bold 36px sans-serif';
+    ctx.textAlign = 'center';
+    const winnerText = player.hp > 0 ? "PLAYER WINS!" : "ENEMY WINS!";
+    ctx.fillText(winnerText, canvas.width / 2, 140);
+
+    if (gameOverTimer <= 0) resetGame();
+  }
+
+  player.update(enemy);
+  enemy.update(player);
+
+  player.drawShadow();
+  enemy.drawShadow();
+
+  player.draw();
+  enemy.draw();
+
+  updateAndDrawEffects();
+
+  ctx.restore();
+
+  drawHUD();
+
+  setTimeout(() => {
+    requestAnimationFrame(gameLoop);
+  }, 1000 / (60 * slowMoFactor) - 1000 / 60);
+}
+
+// Launch Engine
+gameLoop();
+</script>
+</body>
+</html>

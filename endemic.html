@@ -1,6 +1,4 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -10,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Endemic Animals of Ethiopia</title>
+
+    <link rel="icon" type="image/png" href="img/icon.jpg">
 
     <style>
 
@@ -61,6 +61,38 @@
         nav a:focus-visible {
             outline: 2px solid #38bdf8;
             outline-offset: 2px;
+        }
+
+        .hero {
+            height: 450px;
+            background: url("img/EA.png") center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, .55);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .overlay h2 {
+            color: white;
+            font-size: 58px;
+        }
+
+        .overlay p {
+            color: white;
+            font-size: 20px;
+            margin-top: 20px;
+            width: 75%;
+            line-height: 1.6;
         }
 
         .title {
@@ -133,9 +165,9 @@
         }
 
         .location {
-            color: #cbd5e1 !important;
+            color: #cbd5e1;
             font-size: 14px;
-            margin-bottom: 15px !important;
+            margin-bottom: 15px;
         }
 
         .card-button {
@@ -172,48 +204,141 @@
             color: #0f172a;
         }
 
+
+   
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            color: white;
+            width: 90%;
+            max-width: 650px;
+            margin: 8% auto;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #38bdf8;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #FFD400;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px 10px;
+            }
+
+            .hero {
+                height: 350px;
+            }
+
+            .overlay h2 {
+                font-size: 38px;
+            }
+
+            .overlay p {
+                font-size: 16px;
+                width: 90%;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20% auto;
+            }
+
+        }
+
     </style>
 
 </head>
 
+
 <body>
+
+
 
     <nav aria-label="Main navigation">
 
         <ul>
 
-            <li>
-                <a href="Wildlife.html">Home</a>
-            </li>
+            <li><a href="Wildlife.html">Home</a></li>
 
-            <li>
-                <a href="endangered.html">Endangered</a>
-            </li>
+            <li><a href="endangered.html">Endangered</a></li>
 
-            <li>
-                <a href="protected.html">Protected Areas</a>
-            </li>
+            <li><a href="protected.html">Protected Areas</a></li>
 
-            <li>
-                <a href="ethiopian-wildlife.html">Ethiopian Wildlife</a>
-            </li>
+            <li><a href="ethiopian-wildlife.html">Ethiopian Wildlife</a></li>
 
-            <li>
-                <a href="endemic.html" class="active">Endemic</a>
-            </li>
+            <li><a href="endemic.html" class="active">Endemic</a></li>
 
-            <li>
-                <a href="protect-animals.html">Protect Animals</a>
-            </li>
+            <li><a href="protect-animals.html">Protect Animals</a></li>
 
         </ul>
 
     </nav>
 
 
-    <h2 class="title">Endemic Animals of Ethiopia</h2>
+
+
+    <div class="hero">
+
+        <div class="overlay">
+
+            <h2>Endemic Animals of Ethiopia</h2>
+
+            <p>
+                Ethiopia is home to many unique endemic animals found nowhere
+                else in the world. These animals are an important part of
+                Ethiopia's biodiversity and natural heritage.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <h2 class="title">
+        Endemic Animals of Ethiopia
+    </h2>
 
     <div class="line"></div>
+
 
 
     <p class="intro">
@@ -224,6 +349,8 @@
         the country's most remarkable endemic animals below.
 
     </p>
+
+
 
 
     <div class="grid">
@@ -242,18 +369,22 @@
 
                 <p>
                     The Ethiopian wolf is one of Ethiopia's most famous
-                    endemic mammals. It is the rarest canid in Africa and
-                    is specially adapted to living in the country's
-                    high-altitude grasslands.
+                    endemic mammals.
                 </p>
 
                 <p class="location">
-                    <strong>Location:</strong> Bale Mountains,
-                    Simien Mountains and Ethiopian Highlands
+
+                    <strong>Location:</strong>
+                    Bale Mountains, Simien Mountains and Ethiopian Highlands
+
                 </p>
 
-                <button class="card-button">
+                <button
+                    class="card-button"
+                    onclick="showAnimal('Ethiopian Wolf')">
+
                     Learn More
+
                 </button>
 
             </div>
@@ -261,6 +392,8 @@
         </div>
 
 
+
+     
 
         <div class="card">
 
@@ -274,16 +407,22 @@
 
                 <p>
                     The Walia ibex is a wild mountain goat found only
-                    in Ethiopia. It has long curved horns and lives on
-                    steep cliffs and rocky mountains.
+                    in Ethiopia.
                 </p>
 
                 <p class="location">
-                    <strong>Location:</strong> Simien Mountains
+
+                    <strong>Location:</strong>
+                    Simien Mountains
+
                 </p>
 
-                <button class="card-button">
+                <button
+                    class="card-button"
+                    onclick="showAnimal('Walia Ibex')">
+
                     Learn More
+
                 </button>
 
             </div>
@@ -291,7 +430,8 @@
         </div>
 
 
-      
+
+    
 
         <div class="card">
 
@@ -304,18 +444,23 @@
                 <h3>Mountain Nyala</h3>
 
                 <p>
-                    The mountain nyala is a large antelope that is
-                    native to Ethiopia. It is known for its impressive
-                    horns and lives mainly in highland forests and
-                    grasslands.
+                    The mountain nyala is a large antelope native
+                    to Ethiopia.
                 </p>
 
                 <p class="location">
-                    <strong>Location:</strong> Bale and Arsi Mountains
+
+                    <strong>Location:</strong>
+                    Bale and Arsi Mountains
+
                 </p>
 
-                <button class="card-button">
+                <button
+                    class="card-button"
+                    onclick="showAnimal('Mountain Nyala')">
+
                     Learn More
+
                 </button>
 
             </div>
@@ -323,7 +468,8 @@
         </div>
 
 
-     
+
+   
 
         <div class="card">
 
@@ -336,19 +482,23 @@
                 <h3>Gelada</h3>
 
                 <p>
-                    The gelada is a grass-eating primate found naturally
-                    only in the Ethiopian Highlands. It is sometimes
-                    called the bleeding-heart monkey because of the
-                    red patch on its chest.
+                    The gelada is a grass-eating primate found in
+                    the Ethiopian Highlands.
                 </p>
 
                 <p class="location">
-                    <strong>Location:</strong> Simien Mountains and
-                    Ethiopian Highlands
+
+                    <strong>Location:</strong>
+                    Simien Mountains and Ethiopian Highlands
+
                 </p>
 
-                <button class="card-button">
+                <button
+                    class="card-button"
+                    onclick="showAnimal('Gelada')">
+
                     Learn More
+
                 </button>
 
             </div>
@@ -357,10 +507,12 @@
 
 
 
+
+
         <div class="card">
 
             <img
-                src="https://th.bing.com/th/id/R.d379158f412729497f656350eae5438e?rik=uLD5pdngevcPDQ&riu=http%3a%2f%2fwww.animalsanimals.com%2fpix%2fARD%2f000%2fARD_000AWM042_01_P.JPG&ehk=ngzn58O1%2fyaWG29CmT%2b8VhnC58DcqszHQhChwrEQQ1E%3d&risl=&pid=ImgRaw&r=0"
+                src="https://th.bing.com/th/id/R.d379158f412729497f656350eae5438e?rik=uLD5pdngevcPDQ&riu=http%3a%2f%2fwww.animalsanimals.com%2fpix%2fARD%2f000%2fARD_000AWM042_01_P.JPG"
                 alt="Ethiopian Hare">
 
             <div class="content">
@@ -368,23 +520,30 @@
                 <h3>Ethiopian Hare</h3>
 
                 <p>
-                    The Ethiopian hare is a mammal associated with
-                    Ethiopia's highland environments. It is adapted
-                    to grassland and open habitats and contributes
-                    to the local ecosystem.
+                    The Ethiopian hare is associated with Ethiopia's
+                    highland environments.
                 </p>
 
                 <p class="location">
-                    <strong>Location:</strong> Ethiopian Highlands
+
+                    <strong>Location:</strong>
+                    Ethiopian Highlands
+
                 </p>
 
-                <button class="card-button">
+                <button
+                    class="card-button"
+                    onclick="showAnimal('Ethiopian Hare')">
+
                     Learn More
+
                 </button>
 
             </div>
 
         </div>
+
+
 
 
 
@@ -400,16 +559,21 @@
 
                 <p>
                     The Bale monkey is a primate native to Ethiopia.
-                    It is strongly associated with bamboo forests and
-                    highland habitats in the Bale Mountains.
                 </p>
 
                 <p class="location">
-                    <strong>Location:</strong> Bale Mountains
+
+                    <strong>Location:</strong>
+                    Bale Mountains
+
                 </p>
 
-                <button class="card-button">
+                <button
+                    class="card-button"
+                    onclick="showAnimal('Bale Monkey')">
+
                     Learn More
+
                 </button>
 
             </div>
@@ -430,17 +594,23 @@
                 <h3>Ethiopian Bush Crow</h3>
 
                 <p>
-                    The Ethiopian bush crow is a bird found only in
-                    southern Ethiopia. It is easily recognized by its
-                    pale body, dark wings, and distinctive appearance.
+                    The Ethiopian bush crow is a unique bird found
+                    in southern Ethiopia.
                 </p>
 
                 <p class="location">
-                    <strong>Location:</strong> Southern Ethiopia
+
+                    <strong>Location:</strong>
+                    Southern Ethiopia
+
                 </p>
 
-                <button class="card-button">
+                <button
+                    class="card-button"
+                    onclick="showAnimal('Ethiopian Bush Crow')">
+
                     Learn More
+
                 </button>
 
             </div>
@@ -461,23 +631,29 @@
                 <h3>Rouget's Rail</h3>
 
                 <p>
-                    Rouget's rail is a small bird native to the
-                    highlands of Ethiopia and Eritrea. It lives in
-                    grasslands, wetlands, and areas with thick
-                    vegetation.
+                    Rouget's rail is a small bird found in Ethiopian
+                    highland habitats.
                 </p>
 
                 <p class="location">
-                    <strong>Location:</strong> Ethiopian Highlands
+
+                    <strong>Location:</strong>
+                    Ethiopian Highlands
+
                 </p>
 
-                <button class="card-button">
+                <button
+                    class="card-button"
+                    onclick="showAnimal('Rouget\'s Rail')">
+
                     Learn More
+
                 </button>
 
             </div>
 
         </div>
+
 
 
        
@@ -493,18 +669,23 @@
                 <h3>Harwood's Francolin</h3>
 
                 <p>
-                    Harwood's francolin is a rare bird associated with
-                    Ethiopia. It depends on suitable grassland and
-                    woodland habitats for food and shelter.
+                    Harwood's francolin is a rare bird associated
+                    with Ethiopia.
                 </p>
 
                 <p class="location">
-                    <strong>Location:</strong> Central and northern
-                    Ethiopia
+
+                    <strong>Location:</strong>
+                    Central and northern Ethiopia
+
                 </p>
 
-                <button class="card-button">
+                <button
+                    class="card-button"
+                    onclick="showAnimal('Harwood\'s Francolin')">
+
                     Learn More
+
                 </button>
 
             </div>
@@ -515,11 +696,148 @@
     </div>
 
 
+
+    <!-- MODAL -->
+
+    <div id="animalModal" class="modal">
+
+        <div class="modal-content">
+
+            <span
+                class="close"
+                onclick="closeAnimal()">
+
+                &times;
+
+            </span>
+
+            <h2 id="animalName"></h2>
+
+            <p id="animalInfo"></p>
+
+        </div>
+
+    </div>
+
+
+
     <a class="back" href="Wildlife.html">
+
         ← Back to Wildlife
+
     </a>
+
+
+
+  
+
+    <script>
+
+        const animals = {
+
+
+            "Ethiopian Wolf":
+
+                "The Ethiopian wolf is one of the rarest canids in the world. It is found mainly in Ethiopia's high-altitude Afroalpine grasslands. It has reddish-orange fur, long legs and a narrow muzzle. Ethiopian wolves mainly feed on rodents such as giant mole-rats. Habitat loss, diseases and human activity threaten their survival.",
+
+
+            "Walia Ibex":
+
+                "The Walia ibex is a wild mountain goat found only in Ethiopia. It is famous for its large curved horns and strong body. Walia ibex live on steep rocky cliffs in the Simien Mountains. They mainly eat grasses, herbs, leaves and shrubs. Conservation programs help protect this rare Ethiopian species.",
+
+
+            "Mountain Nyala":
+
+                "The mountain nyala is a large antelope native to Ethiopia. Males have large spiral horns while females usually do not have horns. Mountain nyalas live in highland forests, grasslands and bushlands, especially around the Bale Mountains. They feed mainly on grasses, leaves and other vegetation.",
+
+
+            "Gelada":
+
+                "The gelada is a unique primate found mainly in the Ethiopian Highlands. It is sometimes called the bleeding-heart monkey because of the red patch on its chest. Geladas spend much of their time on the ground and mainly eat grass. They live in large and complex social groups.",
+
+
+            "Ethiopian Hare":
+
+                "The Ethiopian hare is associated with Ethiopia's highland grasslands and open habitats. It has long ears and powerful hind legs that help it move quickly. It mainly feeds on grasses and other vegetation and plays an important role in the highland ecosystem.",
+
+
+            "Bale Monkey":
+
+                "The Bale monkey is a primate native to Ethiopia. It is strongly associated with bamboo forests in and around the Bale Mountains. Bamboo forms an important part of its diet. Habitat destruction and fragmentation can threaten populations of the Bale monkey.",
+
+
+            "Ethiopian Bush Crow":
+
+                "The Ethiopian bush crow is a distinctive bird found in a limited area of southern Ethiopia. It has a pale body, dark wings and a dark tail. It often lives in open woodland and savanna environments and feeds on insects and other small food items.",
+
+
+            "Rouget's Rail":
+
+                "Rouget's rail is a small bird found in the highlands of Ethiopia and Eritrea. It usually lives in wet grasslands, marshes and areas with thick vegetation. It spends much of its time walking through vegetation while searching for food.",
+
+
+            "Harwood's Francolin":
+
+                "Harwood's francolin is a rare bird associated with Ethiopia. It is usually found in areas containing grassland, woodland and bush vegetation. It searches on the ground for seeds, insects and other food. Protecting suitable natural habitats is important for the survival of this species."
+
+
+        };
+
+
+
+        function showAnimal(animal) {
+
+            document.getElementById("animalName").innerText =
+                animal;
+
+            document.getElementById("animalInfo").innerText =
+                animals[animal];
+
+            document.getElementById("animalModal").style.display =
+                "block";
+
+        }
+
+
+
+        function closeAnimal() {
+
+            document.getElementById("animalModal").style.display =
+                "none";
+
+        }
+
+
+
+        window.onclick = function(event) {
+
+            const modal =
+                document.getElementById("animalModal");
+
+            if (event.target === modal) {
+
+                modal.style.display = "none";
+
+            }
+
+        };
+
+
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+
+                closeAnimal();
+
+            }
+
+        });
+
+    </script>
 
 
 </body>
 
 </html>
+```

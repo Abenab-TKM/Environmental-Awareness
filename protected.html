@@ -1,18 +1,12 @@
-
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Protected Areas in Ethiopia</title>
+    <link rel="icon" type="image/jpg" href="img/icon.jpg">
 
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -20,47 +14,77 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #0f172a;
-            color: white;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
             padding: 30px 20px;
         }
 
         nav {
             max-width: 900px;
             margin: 0 auto 25px;
-            background: #1e293b;
+            background-color: #1e293b;
             border: 2px solid #334155;
-            padding: 15px;
             border-radius: 12px;
+            padding: 12px;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            justify-content: space-around;
-            gap: 6px;
+            justify-content: center;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         nav a {
-            color: white;
+            color: #f8fafc;
             text-decoration: none;
-            display: block;
-            padding: 10px 12px;
+            padding: 10px 18px;
             border-radius: 8px;
-            transition: background 0.2s ease, color 0.2s ease;
+            display: block;
+            transition: 0.3s;
         }
 
         nav a:hover,
         nav a:focus-visible,
         nav a.active {
-            background: #0f766e;
+            background-color: #0f766e;
         }
 
-        nav a:focus-visible {
-            outline: 2px solid #38bdf8;
-            outline-offset: 2px;
+        .hero {
+            max-width: 1200px;
+            height: 450px;
+            margin: 0 auto;
+            background: url("img/protect.png") center/cover no-repeat;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .overlay {
+            background: rgba(0, 0, 0, 0.55);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .overlay h2 {
+            color: white;
+            font-size: 58px;
+            line-height: 1.2;
+        }
+
+        .overlay p {
+            color: white;
+            font-size: 20px;
+            margin-top: 20px;
+            width: 75%;
+            line-height: 1.6;
         }
 
         .title {
@@ -97,12 +121,12 @@
         }
 
         .card {
-            background: #1e293b;
+            background-color: #1e293b;
             border: 2px solid #334155;
             border-radius: 18px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
-            transition: .3s;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            transition: 0.3s;
         }
 
         .card:hover {
@@ -114,6 +138,7 @@
             width: 100%;
             height: 220px;
             object-fit: cover;
+            display: block;
         }
 
         .card .content {
@@ -141,7 +166,6 @@
             display: inline-block;
             background-color: #0f766e;
             color: white;
-            text-decoration: none;
             padding: 10px 18px;
             border-radius: 8px;
             font-size: 14px;
@@ -160,374 +184,424 @@
             width: fit-content;
             margin: 10px auto 30px;
             padding: 10px 18px;
-            background: #0f766e;
+            background-color: #0f766e;
             color: white;
             text-decoration: none;
             border-radius: 8px;
+            transition: 0.3s;
         }
 
         .back:hover {
-            background: #38bdf8;
+            background-color: #38bdf8;
             color: #0f172a;
         }
 
-    </style>
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.80);
+            padding: 20px;
+        }
 
+        .modal-content {
+            background-color: #1e293b;
+            width: 90%;
+            max-width: 650px;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 18px;
+            border: 2px solid #38bdf8;
+            position: relative;
+            text-align: center;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .modal-location {
+            color: #FFD400;
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .modal-content p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-width: 420px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #334155;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #FFD400;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+        @media (max-width: 650px) {
+            body {
+                padding: 15px 10px;
+            }
+
+            nav ul {
+                gap: 5px;
+            }
+
+            nav a {
+                padding: 8px 12px;
+                font-size: 14px;
+            }
+
+            .hero {
+                height: 350px;
+            }
+
+            .overlay h2 {
+                font-size: 38px;
+            }
+
+            .overlay p {
+                font-size: 16px;
+                width: 90%;
+            }
+
+            .title {
+                font-size: 26px;
+            }
+
+            .intro {
+                font-size: 15px;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 15% auto;
+                padding: 25px 15px;
+            }
+
+            .modal-image {
+                height: 180px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
     <nav aria-label="Main navigation">
-
         <ul>
-
-            <li>
-                <a href="Wildlife.html">Home</a>
-            </li>
-
-            <li>
-                <a href="endangered.html">Endangered</a>
-            </li>
-
-            <li>
-                <a href="protected.html" class="active">
-                    Protected Areas
-                </a>
-            </li>
-
-            <li>
-                <a href="ethiopian-wildlife.html">
-                    Ethiopian Wildlife
-                </a>
-            </li>
-
-            <li>
-                <a href="endemic.html">Endemic</a>
-            </li>
-
-            <li>
-                <a href="protect-animals.html">
-                    Protect Animals
-                </a>
-            </li>
-
+            <li><a href="Wildlife.html">Home</a></li>
+            <li><a href="endangered.html">Endangered</a></li>
+            <li><a href="protected.html" class="active">Protected Areas</a></li>
+            <li><a href="ethiopian-wildlife.html">Ethiopian Wildlife</a></li>
+            <li><a href="endemic.html">Endemic</a></li>
+            <li><a href="protect-animals.html">Protect Animals</a></li>
         </ul>
-
     </nav>
 
+    <div class="hero">
+        <div class="overlay">
+            <h2>Protected Areas in Ethiopia</h2>
+            <p>
+                Ethiopia's protected areas help conserve wildlife,
+                forests, mountains, grasslands, rivers, and important ecosystems.
+            </p>
+        </div>
+    </div>
 
     <h2 class="title">Protected Areas in Ethiopia</h2>
 
     <div class="line"></div>
 
-
     <p class="intro">
-
         Ethiopia has many protected areas that conserve wildlife,
         forests, mountains, grasslands, rivers, lakes, and other
         important ecosystems. These areas provide safe habitats for
         wildlife and help protect Ethiopia's unique biodiversity.
-
     </p>
-
 
     <div class="grid">
 
-
-      
-
         <div class="card">
-
-            <img
-                src="https://nationalparksassociation.org/wp-content/uploads/2024/02/Simien-Mountains-National-Park.jpg"
-                alt="Simien Mountains">
-
+            <img src="https://nationalparksassociation.org/wp-content/uploads/2024/02/Simien-Mountains-National-Park.jpg" alt="Simien Mountains National Park">
             <div class="content">
-
                 <h3>Simien Mountains National Park</h3>
-
                 <p>
-                    Simien Mountains National Park is famous for its
-                    dramatic mountains, deep valleys, and cliffs.
-                    It protects important wildlife including the
-                    Walia ibex, gelada, and Ethiopian wolf.
+                    Famous for dramatic mountains, deep valleys,
+                    cliffs, and important wildlife.
                 </p>
-
                 <p class="location">
                     <strong>Location:</strong> Amhara Region
                 </p>
-
-                <button class="card-button">
+                <button class="card-button" onclick="showPark('Simien Mountains National Park')">
                     Explore Park
                 </button>
-
             </div>
-
         </div>
 
-
-
-
         <div class="card">
-
-            <img
-                src="https://tse4.mm.bing.net/th/id/OIP.o5FRFa3xZ9ASs-XWXulFowHaFK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                alt="Bale Mountains">
-
+            <img src="https://tse4.mm.bing.net/th/id/OIP.o5FRFa3xZ9ASs-XWXulFowHaFK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Bale Mountains National Park">
             <div class="content">
-
                 <h3>Bale Mountains National Park</h3>
-
                 <p>
-                    Bale Mountains National Park contains high-altitude
-                    grasslands, wetlands, forests, and the Sanetti
-                    Plateau. It is especially important for the
-                    conservation of the Ethiopian wolf.
+                    A large protected area containing forests,
+                    wetlands, grasslands, and high mountains.
                 </p>
-
                 <p class="location">
                     <strong>Location:</strong> Oromia Region
                 </p>
-
-                <button class="card-button">
+                <button class="card-button" onclick="showPark('Bale Mountains National Park')">
                     Explore Park
                 </button>
-
             </div>
-
         </div>
 
-
-
         <div class="card">
-
-            <img
-                src="https://tse4.mm.bing.net/th/id/OIP.9eNn7v7NYn1mrefjQ8d-GgHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                alt="Awash National Park">
-
+            <img src="https://tse4.mm.bing.net/th/id/OIP.9eNn7v7NYn1mrefjQ8d-GgHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Awash National Park">
             <div class="content">
-
                 <h3>Awash National Park</h3>
-
                 <p>
-                    Awash National Park contains savanna, acacia
-                    woodland, volcanic landscapes, waterfalls, and
-                    the Awash River. It supports animals such as
-                    oryx, gazelles, kudu, and many bird species.
+                    A protected landscape with savanna, woodland,
+                    volcanic areas, waterfalls, and wildlife.
                 </p>
-
                 <p class="location">
                     <strong>Location:</strong> Afar and Oromia Regions
                 </p>
-
-                <button class="card-button">
+                <button class="card-button" onclick="showPark('Awash National Park')">
                     Explore Park
                 </button>
-
             </div>
-
         </div>
 
-
-
-
         <div class="card">
-
-            <img
-                src="https://tse4.mm.bing.net/th/id/OIP.18h2uPSCiv_6qqvHtzDdwwHaE7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                alt="Nech Sar National Park">
-
+            <img src="https://tse4.mm.bing.net/th/id/OIP.18h2uPSCiv_6qqvHtzDdwwHaE7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Nech Sar National Park">
             <div class="content">
-
                 <h3>Nech Sar National Park</h3>
-
                 <p>
-                    Nech Sar is known for its grasslands, wildlife,
-                    and beautiful landscapes between Lakes Abaya
-                    and Chamo. The park provides habitat for several
-                    species of mammals and birds.
+                    A beautiful park located between Lakes Abaya
+                    and Chamo.
                 </p>
-
                 <p class="location">
-                    <strong>Location:</strong> Southern Ethiopia,
-                    near Arba Minch
+                    <strong>Location:</strong> Near Arba Minch
                 </p>
-
-                <button class="card-button">
+                <button class="card-button" onclick="showPark('Nech Sar National Park')">
                     Explore Park
                 </button>
-
             </div>
-
         </div>
 
-
-   
-
         <div class="card">
-
-            <img
-                src="https://live.staticflickr.com/65535/51186682811_7cc75050d1_z.jpg"
-                alt="Omo National Park">
-
+            <img src="https://live.staticflickr.com/65535/51186682811_7cc75050d1_z.jpg" alt="Omo National Park">
             <div class="content">
-
                 <h3>Omo National Park</h3>
-
                 <p>
-                    Omo National Park is one of Ethiopia's large
-                    protected landscapes. Its forests, grasslands,
-                    rivers, and savanna support many species of
-                    wildlife.
+                    One of Ethiopia's large protected landscapes
+                    with forests, rivers, grasslands, and savanna.
                 </p>
-
                 <p class="location">
                     <strong>Location:</strong> Southwestern Ethiopia
                 </p>
-
-                <button class="card-button">
+                <button class="card-button" onclick="showPark('Omo National Park')">
                     Explore Park
                 </button>
-
             </div>
-
         </div>
 
-
         <div class="card">
-
-            <img
-                src="https://tse4.mm.bing.net/th/id/OIP.rdGUNOYxG8i-BjLNXVRZlQHaE7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                alt="Mago National Park">
-
+            <img src="https://tse4.mm.bing.net/th/id/OIP.rdGUNOYxG8i-BjLNXVRZlQHaE7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Mago National Park">
             <div class="content">
-
                 <h3>Mago National Park</h3>
-
                 <p>
-                    Mago National Park contains savanna, woodland,
-                    rivers, and wetlands. It provides habitat for
-                    many large mammals and other wildlife species.
+                    Contains savanna, woodland, rivers, wetlands,
+                    and many wildlife species.
                 </p>
-
                 <p class="location">
                     <strong>Location:</strong> Southwestern Ethiopia
                 </p>
-
-                <button class="card-button">
+                <button class="card-button" onclick="showPark('Mago National Park')">
                     Explore Park
                 </button>
-
             </div>
-
         </div>
 
-
-
-
         <div class="card">
-
-            <img
-                src="https://tse2.mm.bing.net/th/id/OIP.VamU1D6FMTF5gYSncjoeKQHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
-                alt="Gambella National Park">
-
+            <img src="https://tse2.mm.bing.net/th/id/OIP.VamU1D6FMTF5gYSncjoeKQHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Gambella National Park">
             <div class="content">
-
                 <h3>Gambella National Park</h3>
-
                 <p>
-                    Gambella National Park protects lowland ecosystems
-                    including wetlands, woodlands, and grasslands.
-                    The region is important for large mammals and
-                    migratory wildlife.
+                    Protects wetlands, grasslands, woodlands,
+                    and important wildlife habitats.
                 </p>
-
                 <p class="location">
                     <strong>Location:</strong> Gambella Region
                 </p>
-
-                <button class="card-button">
+                <button class="card-button" onclick="showPark('Gambella National Park')">
                     Explore Park
                 </button>
-
             </div>
-
         </div>
 
-
-
-
         <div class="card">
-
-            <img
-                src="https://www.worqambatour.com/img/slider_single_tour/Abijata%20Shalla%20birding%20tour-worqamba-tours.jpg"
-                alt="Abijatta Shalla National Park">
-
+            <img src="https://www.worqambatour.com/img/slider_single_tour/Abijata%20Shalla%20birding%20tour-worqamba-tours.jpg" alt="Abijatta-Shalla National Park">
             <div class="content">
-
                 <h3>Abijatta-Shalla National Park</h3>
-
                 <p>
-                    Abijatta-Shalla National Park is centered around
-                    two Rift Valley lakes. The area is especially
-                    important for birds, including large numbers
-                    of flamingos.
+                    A Rift Valley protected area famous for lakes
+                    and many bird species.
                 </p>
-
                 <p class="location">
                     <strong>Location:</strong> Oromia Region
                 </p>
-
-                <button class="card-button">
+                <button class="card-button" onclick="showPark('Abijatta-Shalla National Park')">
                     Explore Park
                 </button>
-
             </div>
-
         </div>
 
-
-
-
         <div class="card">
-
-            <img
-                src="https://tierraabyssinia.com.et/assets/img/attractions/yangudi-rassa-national-park.jpg"
-                alt="Yangudi Rassa National Park">
-
+            <img src="https://tierraabyssinia.com.et/assets/img/attractions/yangudi-rassa-national-park.jpg" alt="Yangudi Rassa National Park">
             <div class="content">
-
                 <h3>Yangudi Rassa National Park</h3>
-
                 <p>
-                    Yangudi Rassa protects an arid landscape in the
-                    Afar Region. Its desert and semi-desert habitats
-                    provide important space for wildlife adapted to
-                    dry environments.
+                    An arid protected landscape with desert and
+                    semi-desert wildlife habitats.
                 </p>
-
                 <p class="location">
                     <strong>Location:</strong> Afar Region
                 </p>
-
-                <button class="card-button">
+                <button class="card-button" onclick="showPark('Yangudi Rassa National Park')">
                     Explore Park
                 </button>
-
             </div>
-
         </div>
-
 
     </div>
 
+    <div id="parkModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closePark()">&times;</span>
+
+            <img id="parkImage" class="modal-image" src="" alt="National Park">
+
+            <h2 id="parkName"></h2>
+
+            <div id="parkLocation" class="modal-location"></div>
+
+            <p id="parkDescription"></p>
+        </div>
+    </div>
 
     <a class="back" href="Wildlife.html">
         ← Back to Wildlife
     </a>
 
+    <script>
+        const parks = {
+            "Simien Mountains National Park": {
+                image: "https://nationalparksassociation.org/wp-content/uploads/2024/02/Simien-Mountains-National-Park.jpg",
+                location: "Amhara Region",
+                description: "Simien Mountains National Park is famous for its dramatic mountains, deep valleys, cliffs, and spectacular landscapes. The park provides important habitat for wildlife including the Walia ibex, gelada, and Ethiopian wolf. Its high mountains and unique ecosystems make it one of Ethiopia's most famous protected areas."
+            },
+
+            "Bale Mountains National Park": {
+                image: "https://tse4.mm.bing.net/th/id/OIP.o5FRFa3xZ9ASs-XWXulFowHaFK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+                location: "Oromia Region",
+                description: "Bale Mountains National Park contains high-altitude grasslands, wetlands, forests, and the Sanetti Plateau. It is one of Ethiopia's most important areas for wildlife conservation and provides habitat for the endangered Ethiopian wolf and many other species."
+            },
+
+            "Awash National Park": {
+                image: "https://tse4.mm.bing.net/th/id/OIP.9eNn7v7NYn1mrefjQ8d-GgHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+                location: "Afar and Oromia Regions",
+                description: "Awash National Park contains savanna, acacia woodland, volcanic landscapes, waterfalls, and the Awash River. The park supports animals such as oryx, gazelles, kudu, and many bird species."
+            },
+
+            "Nech Sar National Park": {
+                image: "https://tse4.mm.bing.net/th/id/OIP.18h2uPSCiv_6qqvHtzDdwwHaE7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+                location: "Southern Ethiopia, near Arba Minch",
+                description: "Nech Sar National Park is known for its beautiful grasslands and wildlife habitats between Lakes Abaya and Chamo. The park provides important habitat for mammals, birds, and other wildlife species."
+            },
+
+            "Omo National Park": {
+                image: "https://live.staticflickr.com/65535/51186682811_7cc75050d1_z.jpg",
+                location: "Southwestern Ethiopia",
+                description: "Omo National Park is one of Ethiopia's large protected landscapes. Its forests, grasslands, rivers, and savanna provide habitats for many species of wildlife and contribute to the conservation of important ecosystems."
+            },
+
+            "Mago National Park": {
+                image: "https://tse4.mm.bing.net/th/id/OIP.rdGUNOYxG8i-BjLNXVRZlQHaE7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+                location: "Southwestern Ethiopia",
+                description: "Mago National Park contains savanna, woodland, rivers, and wetlands. These different environments provide habitats for large mammals, birds, and many other wildlife species."
+            },
+
+            "Gambella National Park": {
+                image: "https://tse2.mm.bing.net/th/id/OIP.VamU1D6FMTF5gYSncjoeKQHaEK?r=0&rs=1&pid=ImgDetMain&o=7&rm=3",
+                location: "Gambella Region",
+                description: "Gambella National Park protects important lowland ecosystems including wetlands, woodlands, and grasslands. The region provides important habitat for large mammals and migratory wildlife."
+            },
+
+            "Abijatta-Shalla National Park": {
+                image: "https://www.worqambatour.com/img/slider_single_tour/Abijata%20Shalla%20birding%20tour-worqamba-tours.jpg",
+                location: "Oromia Region",
+                description: "Abijatta-Shalla National Park is located around two important Rift Valley lakes. The protected area is especially important for birds and supports many species, including large numbers of flamingos."
+            },
+
+            "Yangudi Rassa National Park": {
+                image: "https://tierraabyssinia.com.et/assets/img/attractions/yangudi-rassa-national-park.jpg",
+                location: "Afar Region",
+                description: "Yangudi Rassa National Park protects an arid landscape in the Afar Region. Its desert and semi-desert habitats provide important living spaces for wildlife adapted to Ethiopia's dry environments."
+            }
+        };
+
+        function showPark(park) {
+            document.getElementById("parkName").innerText = park;
+            document.getElementById("parkLocation").innerText = "📍 " + parks[park].location;
+            document.getElementById("parkDescription").innerText = parks[park].description;
+            document.getElementById("parkImage").src = parks[park].image;
+            document.getElementById("parkImage").alt = park;
+            document.getElementById("parkModal").style.display = "block";
+        }
+
+        function closePark() {
+            document.getElementById("parkModal").style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById("parkModal");
+
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closePark();
+            }
+        });
+    </script>
 
 </body>
-
 </html>
-

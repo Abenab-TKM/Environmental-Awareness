@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
-    <link rel="icon" type="image/jpg" href="icon.jpg">
+    <title>Wildlife & Conservation </title>
+    <link rel="icon" type="image/jpg" href="img/icon.jpg">
 
     <style>
         * {
@@ -20,35 +20,108 @@
             padding: 30px 20px;
         }
 
-        nav {
-            max-width: 900px;
-            margin: 0 auto 25px;
-            background-color: #1e293b;
-            border: 2px solid #334155;
-            border-radius: 12px;
-            padding: 12px 20px;
-        }
-
-        nav ul {
-            list-style: none;
+        .nav-item {
+            background: #208fbe;
             display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
+            justify-content: flex-end;
+            height: 55px;
+            align-items: center;
+            padding: 0 8%;
         }
 
-        nav a {
-            color: #f8fafc;
-            text-decoration: none;
-            padding: 10px 18px;
+        .nav-item nav {
+            display: flex;
+            gap: 12px;
+            background: transparent;
+        }
+
+        .nav-item a {
+            color: #ffffff;
+            background-color: #0f172a;
+            border: 2px solid #1e293b;
             border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 8px 16px;
+            display: inline-block;
             transition: 0.3s;
         }
 
-        nav a:hover {
-            background-color: #0f766e;
+        .nav-item a:hover {
+            color: #ffffff ;
+            background-color: #1e293b ;
+            border-color: #00b4d8 ;
+            transform: translateY(-4px) ;
+            box-shadow: 0 6px 15px rgba(0, 180, 216, 0.3) ;
         }
 
+        .main-nav {
+            background: #090d16;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px 8%;
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 14px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .main-nav li {
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-nav a {
+            color: #94a3b8;
+            background-color: #0f172a;
+            border: 2px solid #1e293b;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 10px 22px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+   
+        .main-nav a:hover {
+            color: #ffffff ;
+            background-color: #1e293b ;
+            border-color: #00b4d8 ;
+            transform: translateY(-4px) ;
+            box-shadow: 0 6px 15px rgba(0, 180, 216, 0.3) ;
+        }
+
+        .main-nav li.active a {
+            color: #ffffff;
+            background-color: #0f766e;
+            border-color: #22d3ee;
+            box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
+        }
+
+        .main-nav li.active a:hover {
+            background-color: #14b8a6 ;
+            border-color: #38bdf8 ;
+            transform: translateY(-4px) ;
+            box-shadow: 0 8px 18px rgba(34, 211, 238, 0.4) ;
+        }
         .card {
             max-width: 900px;
             margin: auto;
@@ -59,30 +132,30 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
         .video-section {
-    margin-top: 30px;
-    background: #0f172a;
-    border: 2px solid #0f766e;
-    border-radius: 16px;
-    padding: 25px;
-}
+            margin-top: 30px;
+            background: #0f172a;
+            border: 2px solid #0f766e;
+            border-radius: 16px;
+            padding: 25px;
+        }
 
-.video-section h2 {
-    color: #38bdf8;
-    margin-bottom: 15px;
-}
+        .video-section h2 {
+            color: #38bdf8;
+            margin-bottom: 15px;
+        }
 
-.video-section video {
-    width: 1000px;
-    max-height: 600px;
-    border-radius: 12px;
-    display: block;
-}
+        .video-section video {
+            width: 1000px;
+            max-height: 600px;
+            border-radius: 12px;
+            display: inline-block;
+        }
 
-.video-section p {
-    color: #94a3b8;
-    margin-top: 15px;
-    line-height: 1.6;
-}
+        .video-section p {
+           color: #94a3b8;
+           margin-top: 15px;
+           line-height: 1.6;
+        }
 
         .header {
             border-left: 5px solid #0f766e;
@@ -153,24 +226,26 @@
 
 <body>
 
-    <nav aria-label="Main navigation">
+  <div class="nav-item">
+        <nav>
+            <a href="Contact Us.html">Contact Us</a>
+            <a href="About.html">About</a>
+        </nav>
+    </div>
+
+    <nav class="main-nav">
         <ul>
-             <li><a href="index.html">Home</a></li>
-            <li><a href="Pollution.html">Pollution</a></li>
+            <li><a href="project.html">Home</a></li>
+            <li><a href="pollution.html">Pollution</a></li>
             <li><a href="Solutions.html">Solutions</a></li>
             <li><a href="Wildlife.html">Wildlife</a></li>
             <li><a href="Conservation.html">Conservation</a></li>
         </ul>
     </nav>
     <section class="video-section">
-    <h2>Wildlife & Conservation Video</h2>
-
-    <video controls>
-        <iframe width="867" height="488" src="https://www.youtube.com/embed/6Blnu31m3Z0" title="Episode 1 | The Conservation Link | A Connected Landscape" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        Your browser does not support the video tag.
-    </video>
-
-</section>
+        <h2>Wildlife & Conservation Video</h2>
+        <iframe width="100%" height="488" src="https://www.youtube.com/embed/6Blnu31m3Z0" title="Episode 1 | The Conservation Link | A Connected Landscape" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </section>
     <div class="card">
 
         <div class="header">

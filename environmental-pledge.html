@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Environmental Pledge</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+        }
+
+        .header {
+            border-left: 5px solid #0f766e;
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: white;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border-radius: 9px;
+            border: 2px solid #334155;
+            background-color: #0f172a;
+            color: white;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #22d3ee;
+        }
+
+        textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .pledge-box {
+            background-color: #0f172a;
+            border: 2px solid #0f766e;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            color: #cbd5e1;
+            line-height: 1.7;
+        }
+
+        .agreement {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            color: #cbd5e1;
+        }
+
+        .agreement input {
+            width: auto;
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 9px;
+            background-color: #0f766e;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #14b8a6;
+            transform: translateY(-3px);
+            box-shadow: 0 7px 18px rgba(34, 211, 238, 0.25);
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Make an Environmental Pledge</h1>
+
+        <p>
+            Make a personal commitment to protect nature and adopt
+            environmentally responsible habits.
+        </p>
+    </div>
+
+    <div class="pledge-box">
+        I pledge to respect and protect the environment. I will reduce waste,
+        conserve natural resources, keep my surroundings clean and encourage
+        others to take positive environmental action.
+    </div>
+
+    <form>
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Enter your full name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Age</label>
+            <input type="number" min="10" placeholder="Enter your age">
+        </div>
+
+        <div class="form-group">
+            <label>Country / City</label>
+            <input type="text" placeholder="Enter your location">
+        </div>
+
+        <div class="form-group">
+            <label>Choose Your Main Commitment</label>
+
+            <select required>
+                <option value="">Select commitment</option>
+                <option>Plant More Trees</option>
+                <option>Reduce Plastic Use</option>
+                <option>Save Water</option>
+                <option>Save Electricity</option>
+                <option>Use Reusable Products</option>
+                <option>Protect Wildlife</option>
+                <option>Keep My Community Clean</option>
+                <option>Reduce Food Waste</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Write Your Personal Environmental Pledge</label>
+
+            <textarea
+                placeholder="Example: I pledge to avoid single-use plastic and plant at least five trees this year..."
+                required></textarea>
+        </div>
+
+        <div class="agreement">
+            <input type="checkbox" required>
+            <span>
+                I agree to make a genuine effort to follow this environmental pledge.
+            </span>
+        </div>
+
+        <button type="submit">Make My Pledge</button>
+        
+        <button type="submit">Back to Homepage</button>
+
+
+    </form>
+
+</div>
+
+</body>
+</html>

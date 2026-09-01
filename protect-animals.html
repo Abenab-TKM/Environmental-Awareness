@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,9 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="icon" type="image/jpg" href="img/icon.jpg">
+
     <title>Protect Animals in Ethiopia</title>
 
     <style>
+
         * {
             box-sizing: border-box;
             margin: 0;
@@ -21,6 +23,9 @@
             color: white;
             padding: 30px 20px;
         }
+
+
+   
 
         nav {
             max-width: 900px;
@@ -54,36 +59,41 @@
             background: #0f766e;
         }
 
-     .hero{
-height:450px;
-background:url("img/eb0c8205-ee5f-4eec-8386-0bceb4c67b7c.png") center/cover;
-display:flex;
-justify-content:center;
-align-items:center;
-}
 
-.overlay{
-background:rgba(0,0,0,.55);
-width:100%;
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
+  
 
-.overlay h2{
-color:white;
-font-size:58px;
-}
+        .hero {
+            height: 450px;
+            background: url("img/protect.png") center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-.overlay p{
-color:white;
-font-size:20px;
-margin-top:20px;
-width:75%;
-}
+        .overlay {
+            background: rgba(0, 0, 0, .55);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .overlay h2 {
+            color: white;
+            font-size: 58px;
+        }
+
+        .overlay p {
+            color: white;
+            font-size: 20px;
+            margin-top: 20px;
+            width: 75%;
+            line-height: 1.6;
+        }
+
 
 
         .title {
@@ -110,6 +120,9 @@ width:75%;
             line-height: 1.7;
             font-size: 17px;
         }
+
+
+  
 
         .grid {
             max-width: 1200px;
@@ -155,6 +168,9 @@ width:75%;
             margin-bottom: 15px;
         }
 
+
+   
+
         .card-button {
             display: inline-block;
             background-color: #0f766e;
@@ -173,6 +189,9 @@ width:75%;
             color: #0f172a;
         }
 
+
+       
+
         .back {
             display: block;
             width: fit-content;
@@ -188,189 +207,514 @@ width:75%;
             background: #38bdf8;
             color: #0f172a;
         }
+
+
+        
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: #1e293b;
+            color: white;
+            width: 90%;
+            max-width: 650px;
+            margin: 8% auto;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #38bdf8;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-content h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+        }
+
+        .modal-content p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #FFD400;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+
+        
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px 10px;
+            }
+
+            .hero {
+                height: 350px;
+            }
+
+            .overlay h2 {
+                font-size: 38px;
+            }
+
+            .overlay p {
+                font-size: 16px;
+                width: 90%;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 20% auto;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
+
+
     <nav aria-label="Main navigation">
+
         <ul>
+
             <li><a href="Wildlife.html">Home</a></li>
             <li><a href="endangered.html">Endangered</a></li>
             <li><a href="protected.html">Protected Areas</a></li>
             <li><a href="ethiopian-wildlife.html">Ethiopian Wildlife</a></li>
             <li><a href="endemic.html">Endemic</a></li>
             <li><a href="protect-animals.html" class="active">Protect Animals</a></li>
+
         </ul>
+
     </nav>
-         <div class="hero">
-<div class="overlay">
-<h2>Endangered Animals in Ethiopia</h2>
-<p>Discover the unique wildlife that calls Ethiopia home and learn about the threats they face.</p>
-</div>
+
+
+
+
+    <div class="hero">
+
+        <div class="overlay">
+
+            <h2>Protect Animals in Ethiopia</h2>
+
+            <p>
+                Protecting animals in Ethiopia helps preserve biodiversity
+                and endangered species. We can protect wildlife by saving
+                habitats, stopping poaching, and reducing pollution.
+            </p>
+
+        </div>
+
     </div>
+
+
 
     <h2 class="title">Protect Animals in Ethiopia</h2>
 
     <div class="line"></div>
 
+
     <p class="intro">
+
         Ethiopia is home to many unique and endangered animals.
         Protecting wildlife requires cooperation between communities,
         conservation organizations, government institutions, and visitors.
         Everyone can help protect animals and their habitats.
+
     </p>
+
+
+
 
     <div class="grid">
 
+
+
         <div class="card">
+
             <img src="https://tse2.mm.bing.net/th/id/OIP.UAOF9TOt7hNEN75O4Ml92gHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                  alt="Wild animal in nature">
 
             <div class="content">
+
                 <h3>Protect Wildlife Habitats</h3>
 
                 <p>
                     Protecting forests, grasslands, mountains, and wetlands
-                    gives wild animals safe places to live, feed, and reproduce.
-                    Avoiding destruction of natural habitats is one of the most
-                    important ways to protect Ethiopian wildlife.
+                    gives wild animals safe places to live and reproduce.
                 </p>
 
-                <button class="card-button">Protect Habitats</button>
+                <button class="card-button"
+                    onclick="showProtection('Protect Wildlife Habitats')">
+
+                    Protect Habitats
+
+                </button>
+
             </div>
+
         </div>
 
 
+
+
         <div class="card">
+
             <img src="https://i.etsystatic.com/26331095/r/il/749629/7194699877/il_794xN.7194699877_bmj3.jpg"
                  alt="Wildlife conservation">
 
             <div class="content">
+
                 <h3>Stop Illegal Hunting</h3>
 
                 <p>
-                    Illegal hunting and poaching can reduce wildlife populations.
-                    People should report illegal hunting and avoid buying products
-                    made from protected animals or wildlife parts.
+                    Illegal hunting and poaching can reduce wildlife
+                    populations and threaten endangered animals.
                 </p>
 
-                <button class="card-button">Stop Poaching</button>
+                <button class="card-button"
+                    onclick="showProtection('Stop Illegal Hunting')">
+
+                    Stop Poaching
+
+                </button>
+
             </div>
+
         </div>
 
 
+
+
         <div class="card">
+
             <img src="https://tse4.mm.bing.net/th/id/OIP.daokfO07SuzY-hsjkooeggHaEO?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                  alt="African wildlife">
 
             <div class="content">
+
                 <h3>Protect Forests</h3>
 
                 <p>
                     Forests provide food and shelter for many animals.
-                    Planting trees, reducing unnecessary cutting, and supporting
-                    reforestation projects can help restore wildlife habitats.
+                    Planting trees can help restore wildlife habitats.
                 </p>
 
-                <button class="card-button">Plant Trees</button>
+                <button class="card-button"
+                    onclick="showProtection('Protect Forests')">
+
+                    Plant Trees
+
+                </button>
+
             </div>
+
         </div>
 
 
+
+
         <div class="card">
+
             <img src="https://th.bing.com/th/id/R.5526ef69eb5dd97e821f3796b0442a62?rik=71w3TSp2Dzdq9Q&pid=ImgRaw&r=0"
                  alt="Wildlife">
 
             <div class="content">
+
                 <h3>Keep the Environment Clean</h3>
 
                 <p>
-                    Plastic, chemicals, and other waste can harm animals and
-                    pollute their habitats. Reducing waste, recycling materials,
-                    and keeping rivers and forests clean helps wildlife survive.
+                    Plastic, chemicals, and other waste can harm animals
+                    and pollute their habitats.
                 </p>
 
-                <button class="card-button">Reduce Pollution</button>
+                <button class="card-button"
+                    onclick="showProtection('Keep the Environment Clean')">
+
+                    Reduce Pollution
+
+                </button>
+
             </div>
+
         </div>
 
 
+
+
         <div class="card">
+
             <img src="https://tse2.mm.bing.net/th/id/OIP.jPNoFSAVwdacJAuYaDpgYgHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                  alt="Fox in nature">
 
             <div class="content">
+
                 <h3>Support Conservation</h3>
 
                 <p>
-                    Conservation organizations and protected areas work to
-                    preserve Ethiopia's wildlife. Supporting responsible
-                    conservation projects can help endangered species recover.
+                    Conservation organizations and protected areas work
+                    to preserve Ethiopia's wildlife.
                 </p>
 
-                <button class="card-button">Support Conservation</button>
+                <button class="card-button"
+                    onclick="showProtection('Support Conservation')">
+
+                    Support Conservation
+
+                </button>
+
             </div>
+
         </div>
 
 
+
+
         <div class="card">
+
             <img src="https://tse4.mm.bing.net/th/id/OIP.m5oUgNTATj13tOMP5GTOUAHaE8?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                  alt="Wildlife protection">
 
             <div class="content">
+
                 <h3>Educate the Community</h3>
 
                 <p>
-                    Teaching people about wildlife and conservation can create
-                    stronger protection for animals. Schools, families, and
-                    communities can all help spread awareness.
+                    Teaching people about wildlife conservation can
+                    create stronger protection for animals.
                 </p>
 
-                <button class="card-button">Spread Awareness</button>
+                <button class="card-button"
+                    onclick="showProtection('Educate the Community')">
+
+                    Spread Awareness
+
+                </button>
+
             </div>
+
         </div>
 
 
+
+
         <div class="card">
+
             <img src="https://th.bing.com/th/id/R.9d4ff3464288e82abd11b6b7496af8f5?rik=R%2fxGPOrYE7xQqg&riu=http%3a%2f%2fwww.holbrooktravel.com%2fsites%2fdefault%2ffiles%2fRespect-wildlife-blog.jpg&ehk=IwDQ6OJDLY1k%2bs8PdnLo%2blrKcvZbzIvqYWa0iV50Teo%3d&risl=&pid=ImgRaw&r=0"
                  alt="Wild animals">
 
             <div class="content">
+
                 <h3>Respect Wildlife</h3>
 
                 <p>
-                    Visitors should observe wild animals from a safe distance,
-                    avoid disturbing them, and never feed or capture wild animals.
-                    Responsible tourism helps protect wildlife.
+                    Visitors should observe wild animals from a safe
+                    distance and avoid disturbing them.
                 </p>
 
-                <button class="card-button">Respect Animals</button>
+                <button class="card-button"
+                    onclick="showProtection('Respect Wildlife')">
+
+                    Respect Animals
+
+                </button>
+
             </div>
+
         </div>
 
 
+
+
         <div class="card">
+
             <img src="https://tse1.mm.bing.net/th/id/OIP.1xDG2Ra21pejfn1_EUoflwHaE7?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
                  alt="Animal conservation">
 
             <div class="content">
+
                 <h3>Protect Endangered Species</h3>
 
                 <p>
-                    Species such as the Ethiopian wolf, Walia ibex, and mountain
-                    nyala need special protection. Protecting their habitats and
-                    reducing human threats can help prevent extinction.
+                    Endangered animals need special protection to
+                    prevent extinction.
                 </p>
 
-                <button class="card-button">Save Endangered Animals</button>
+                <button class="card-button"
+                    onclick="showProtection('Protect Endangered Species')">
+
+                    Save Endangered Animals
+
+                </button>
+
             </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+    <div id="protectionModal" class="modal">
+
+        <div class="modal-content">
+
+            <span class="close"
+                onclick="closeProtection()">
+
+                &times;
+
+            </span>
+
+            <h2 id="protectionName"></h2>
+
+            <p id="protectionInfo"></p>
+
         </div>
 
     </div>
 
-    <a class="back" href="Wildlife.html">← Back to Wildlife</a>
+
+
+
+    <a class="back" href="Wildlife.html">
+
+        ← Back to Wildlife
+
+    </a>
+
+
+
+
+    <script>
+
+        const protections = {
+
+
+            "Protect Wildlife Habitats":
+
+                "Wild animals depend on healthy habitats for food, water, shelter and reproduction. Protecting forests, mountains, grasslands and wetlands helps animals survive. People can help by avoiding habitat destruction and supporting protected areas.",
+
+
+            "Stop Illegal Hunting":
+
+                "Illegal hunting and poaching can seriously reduce wildlife populations. Endangered animals are especially vulnerable. Communities can help protect wildlife by reporting illegal hunting and refusing to buy products made from protected animals.",
+
+
+            "Protect Forests":
+
+                "Forests provide important habitats for birds, mammals, insects and many other animals. Planting trees and reducing unnecessary deforestation can restore damaged habitats and protect biodiversity.",
+
+
+            "Keep the Environment Clean":
+
+                "Pollution can harm wildlife and destroy natural habitats. Plastic waste, chemicals and other rubbish can contaminate rivers, forests and grasslands. Reducing waste, recycling and proper disposal of rubbish helps protect animals.",
+
+
+            "Support Conservation":
+
+                "Conservation programs help protect wildlife and their natural habitats. Supporting responsible conservation organizations, protected areas and wildlife projects can help endangered species survive and recover.",
+
+
+            "Educate the Community":
+
+                "Education helps people understand why wildlife is important. Schools, families and communities can teach others about endangered animals, conservation and the importance of protecting Ethiopia's natural environment.",
+
+
+            "Respect Wildlife":
+
+                "Wild animals should be observed from a safe distance. People should not disturb, capture or feed wildlife. Responsible tourism and respectful behavior help animals live naturally in their habitats.",
+
+
+            "Protect Endangered Species":
+
+                "Endangered animals need special protection from habitat destruction, illegal hunting and other threats. Protecting species such as the Ethiopian wolf, Walia ibex and mountain nyala helps preserve Ethiopia's biodiversity for future generations."
+
+
+        };
+
+
+
+        function showProtection(protection) {
+
+            document.getElementById("protectionName").innerText =
+                protection;
+
+            document.getElementById("protectionInfo").innerText =
+                protections[protection];
+
+            document.getElementById("protectionModal").style.display =
+                "block";
+
+        }
+
+
+
+        function closeProtection() {
+
+            document.getElementById("protectionModal").style.display =
+                "none";
+
+        }
+
+
+
+        window.onclick = function(event) {
+
+            const modal =
+                document.getElementById("protectionModal");
+
+            if (event.target === modal) {
+
+                modal.style.display = "none";
+
+            }
+
+        };
+
+
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+
+                closeProtection();
+
+            }
+
+        });
+
+    </script>
+
 
 </body>
 
 </html>
+

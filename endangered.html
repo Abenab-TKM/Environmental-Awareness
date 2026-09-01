@@ -1,16 +1,26 @@
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Endangered Animals</title>
 
+    <link rel="icon" type="image/jpg" href="icon.jpg">
+
+
     <style>
-      * {
+
+        * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+
 
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -18,6 +28,9 @@
             color: #f8fafc;
             padding: 30px 20px;
         }
+
+
+
 
         nav {
             max-width: 900px;
@@ -28,6 +41,7 @@
             padding: 12px 20px;
         }
 
+
         nav ul {
             list-style: none;
             display: flex;
@@ -35,6 +49,7 @@
             gap: 10px;
             flex-wrap: wrap;
         }
+
 
         nav a {
             color: #f8fafc;
@@ -44,187 +59,150 @@
             transition: 0.3s;
         }
 
-        nav a:hover {
+
+        nav a:hover,
+        nav a.active {
             background-color: #0f766e;
         }
-.hero{
-height:450px;
-background:url("img/eb0c8205-ee5f-4eec-8386-0bceb4c67b7c.png") center/cover;
-display:flex;
-justify-content:center;
-align-items:center;
-}
-
-.overlay{
-background:rgba(0,0,0,.55);
-width:100%;
-height:100%;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
-
-.overlay h2{
-color:white;
-font-size:58px;
-}
-
-.overlay p{
-color:white;
-font-size:20px;
-margin-top:20px;
-width:75%;
-}
-
-section{
-padding:70px 8%;
-}
-
-.title{
-font-size:42px;
-text-align:center;
-margin-bottom:15px;
-}
-
-.line{
-width:120px;
-height:5px;
-background:#FFD400;
-margin:auto;
-border-radius:20px;
-}
-
-.grid{
-margin-top:50px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-}
-
-.card{
-background:#1e293b;
-border: 2px solid #334155;
-border-radius:18px;
-overflow:hidden;    
-box-shadow:0 10px 25px rgba(0,0,0,.15);
-transition:.3s;
-}
-
-.card:hover{
-transform:translateX(8px);
-}
-
-.card img{
-width:100%;
-height:220px;     
-object-fit:cover;
-}
-
-.card .content{
-padding:20px;
-}
-
-.card .content h3{
-color:#38bdf8;
-margin-bottom:10px;
-font-size:20px;
-}
-
-.card .content p{
-color:#94a3b8;
-line-height:1.6;
-margin-bottom:15px;
-}
-
-.card-button{
-display:inline-block;
-background-color:#0f766e;
-color:white;
-text-decoration:none;
-padding:10px 18px;
-border-radius:8px;
-font-size:14px;
-transition:0.3s;
-border:none;
-cursor:pointer;
-}
-
-.card-button:hover{
-background-color:#38bdf8;
-color:#0f172a;
-}
 
 
-        .header {
-            border-left: 5px solid #0f766e;
-            padding-left: 15px;
-            margin-bottom: 25px;
+
+        .hero {
+            height: 450px;
+            background: url("img/eb0c8205-ee5f-4eec-8386-0bceb4c67b7c.png") center/cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .header h1 {
+
+        .overlay {
+            background: rgba(0, 0, 0, .55);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+
+        .overlay h2 {
             color: white;
+            font-size: 58px;
         }
 
-        .header p {
-            color: #94a3b8;
-            margin-top: 8px;
+
+        .overlay p {
+            color: white;
+            font-size: 20px;
+            margin-top: 20px;
+            width: 75%;
+            line-height: 1.6;
         }
 
-        .pages {
+
+        section {
+            padding: 70px 8%;
+        }
+
+
+   
+
+        .title {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+
+        .line {
+            width: 120px;
+            height: 5px;
+            background: #FFD400;
+            margin: auto;
+            border-radius: 20px;
+        }
+
+
+
+        .grid {
+            margin-top: 50px;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
-        .page-box {
-            background-color: #0f172a;
-            border: 2px solid #0f766e;
-            border-radius: 15px;
-            padding: 25px;
-            transition: 0.3s;
+
+        .card {
+            background: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+            transition: .3s;
         }
 
-        .page-box:hover {
-            transform: translateY(-5px);
+
+        .card:hover {
+            transform: translateY(-8px);
             border-color: #38bdf8;
         }
 
-        .page-box h2 {
-            color: #38bdf8;
-            margin-bottom: 10px;
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
         }
 
-        .page-box p {
+
+        .card .content {
+            padding: 20px;
+        }
+
+
+        .card .content h3 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+
+        .card .content p {
             color: #94a3b8;
             line-height: 1.6;
             margin-bottom: 15px;
         }
 
-        .page-box a {
+
+
+        .card-button {
             display: inline-block;
             background-color: #0f766e;
             color: white;
             text-decoration: none;
             padding: 10px 18px;
             border-radius: 8px;
+            font-size: 14px;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
-        .page-box a:hover {
+
+        .card-button:hover {
             background-color: #38bdf8;
             color: #0f172a;
         }
 
-        @media(max-width:650px) {
-            .pages {
-                grid-template-columns: 1fr;
-            }
-        }
-        
+
+
         .back {
-            display: inline-block;
-            margin-top: 25px;
+            display: block;
+            width: fit-content;
+            margin: 10px auto 30px;
             padding: 10px 18px;
             background: #0f766e;
             color: white;
@@ -232,110 +210,627 @@ color:#0f172a;
             border-radius: 8px;
         }
 
+
         .back:hover {
             background: #38bdf8;
             color: #0f172a;
         }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 20px;
+        }
+
+
+        .modal-content {
+            background: #1e293b;
+            color: white;
+            width: 90%;
+            max-width: 650px;
+            margin: 8% auto;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid #38bdf8;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+
+        .modal-content h2 {
+            color: #38bdf8;
+            margin-bottom: 20px;
+        }
+
+
+        .modal-content p {
+            color: #cbd5e1;
+            line-height: 1.8;
+        }
+
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 10px;
+            font-size: 32px;
+            cursor: pointer;
+            color: #FFD400;
+        }
+
+
+        .close:hover {
+            color: white;
+        }
+
+
+
+        @media (max-width: 650px) {
+
+            body {
+                padding: 15px 10px;
+            }
+
+
+            section {
+                padding: 50px 5%;
+            }
+
+
+            .hero {
+                height: 350px;
+            }
+
+
+            .overlay h2 {
+                font-size: 38px;
+            }
+
+
+            .overlay p {
+                font-size: 16px;
+                width: 90%;
+            }
+
+
+            .title {
+                font-size: 32px;
+            }
+
+
+            .modal-content {
+                width: 95%;
+                margin: 20% auto;
+            }
+
+        }
+
     </style>
+
 </head>
+
+
 
 <body>
 
-<nav aria-label="Main navigation">
-    <ul>
-        <li><a href="Wildlife.html">Home</a></li>
-        <li><a class="active" href="endangered.html" aria-current="page">Endangered</a></li>
-        <li><a href="protected.html">Protected Areas</a></li>
-        <li><a href="ethiopian-wildlife.html">Ethiopian Wildlife</a></li>
-        <li><a href="endemic.html">Endemic</a></li>
-        <li><a href="protect-animals.html">Protect Animals</a></li>
-    </ul>
-</nav>
+
+
+    <nav aria-label="Main navigation">
+
+        <ul>
+
+            <li>
+                <a href="Wildlife.html">Home</a>
+            </li>
+
+            <li>
+                <a class="active"
+                   href="endangered.html"
+                   aria-current="page">
+
+                    Endangered
+
+                </a>
+            </li>
+
+            <li>
+                <a href="protected.html">
+                    Protected Areas
+                </a>
+            </li>
+
+            <li>
+                <a href="ethiopian-wildlife.html">
+                    Ethiopian Wildlife
+                </a>
+            </li>
+
+            <li>
+                <a href="endemic.html">
+                    Endemic
+                </a>
+            </li>
+
+            <li>
+                <a href="protect-animals.html">
+                    Protect Animals
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
 
     <div class="hero">
-<div class="overlay">
-<h2>Endangered Animals in Ethiopia</h2>
-<p>Discover the unique wildlife that calls Ethiopia home and learn about the threats they face.</p>
-</div>
-</div>
 
-<section>
+        <div class="overlay">
 
-<h2 class="title"> Meet Endangered Animals</h2>
-<div class="line"></div>
+            <h2>
+                Endangered Animals in Ethiopia
+            </h2>
 
-<div class="grid">
+            <p>
+                Discover the unique wildlife that calls Ethiopia home
+                and learn about the threats they face.
+            </p>
 
-<div class="card">
-<img src="https://tse4.mm.bing.net/th/id/OIP.Z2_QXZbjnj4-F8bYLT1y4gHaFA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Ethiopian red Wolf">
-<div class="content">
-<h3>Ethiopian red Wolf</h3>
-<p>The Ethiopian wolf, also called the Ethiopian red fox, is found mainly in Ethiopia’s highlands. About 450 adults remain, making it Africa’s most endangered carnivore. It lives in places such as the Bale and Simien Mountains.</p><button class="card-button">Learn More</button></div>
-</div>
+        </div>
 
-<div class="card">
-<img src="https://tse2.mm.bing.net/th/id/OIP.R8403bDe3WMt8eGDxtkrTgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Walia Ibex">
-<div class="content">
-<h3>Walia Ibex </h3>
-<p>The Walia Ibex is an endangered animal found only in Ethiopia’s Simien Mountains. In 2024, only about 306 individuals were counted. Its main threats are poaching and habitat loss.</p><button class="card-button">Learn More</button></div>
-</div>
+    </div>
 
-<div class="card">
-<img src="https://as2.ftcdn.net/v2/jpg/04/37/07/63/1000_F_437076341_u5pLwynu3edbBBGmmWZQkEfjp5yOXYLH.jpg" alt="Mountain Nyala">
-<div class="content">
-<h3>Mountain Nyala</h3>
-<p>The Mountain Nyala is an endangered antelope found only in Ethiopia. About 4,000 remain, mainly in the Bale and Arsi Mountains. Its population is threatened by habitat loss and hunting.</p>
-<button class="card-button">Learn More</button>
-</div>
-</div>
 
-<div class="card">
-<img src="https://thumbs.dreamstime.com/b/african-wild-donkey-equus-asinus-somalicus-grazing-wildlife-park-indigenous-to-east-africa-critically-endangered-374439457.jpg" alt="wild donkey">
-<div class="content">
-<h3>wild donkey</h3>
-<p>The wild donkey is an endangered species found in Ethiopia. It lives in arid regions and is threatened by habitat loss and hunting.</p>
-<button class="card-button">Learn More</button>
-</div>
-</div>
 
-<div class="card">
-<img src="https://thumbs.dreamstime.com/b/male-gelada-theropithecus-gelada-hairy-primate-face-expression-male-gelada-theropithecus-gelada-hairy-primate-face-expression-al-361764212.jpg" alt="Gelada">
-<div class="content">
-<h3>Gelada</h3>
-<p>The Gelada is found mainly in Ethiopia’s highlands, especially the Simien Mountains. Its population is threatened by habitat loss and human activity.</p><button class="card-button">Learn More</button></div>
-</div>
 
-<div class="card">
-<img src="https://www.thoughtco.com/thmb/onAgRak2RCAfoE2uPDezez2OIKY=/5600x3733/filters:fill(auto,1)/wild-dog---laycaon-pictus---a-young-pup-485205975-5b3b502646e0fb0037cc1d79.jpg" alt="African Wild Dogs">
-<div class="content">
-<h3>African Wild Dogs</h3>
-<p>African Wild Dogs are found in parts of Ethiopia, including the Bale Mountains. Their numbers are declining because of habitat loss and disease.</p>
-<button class="card-button">Learn More</button>
-</div>
-</div>
+    <section>
 
-<div class="card">
-<img src="https://tse4.mm.bing.net/th/id/OIP.Rne6ktCZEMk3BhwScSZ76QAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Gorilla">
-<div class="content">
-<h3>Swayne’s Hartebeest</h3>
-<p>Swayne’s Hartebeest is found only in Ethiopia. It lives mainly in protected grasslands and is threatened by habitat loss and hunting.</p><button class="card-button">Learn More</button></div>
-</div>
 
-<div class="card">
-<img src="https://animalfactguide.com/wp-content/uploads/2024/10/colobus-monkey1-725x560.jpg" alt="Colobus Monkey">
-<div class="content">
-<h3> Black-and-white Colobus </h3>
-<p>The Black-and-white Colobus lives in Ethiopia’s forests. Its population is threatened by deforestation and loss of habitat.</p><button class="card-button">Learn More</button></div>
-</div>
+        <h2 class="title">
+            Meet Endangered Animals
+        </h2>
 
-</div>
-</div>
 
-</div>
+        <div class="line"></div>
 
-</section>
 
-</div>
- <a class="back" href="Wildlife.html">← Back to Wildlife</a>
+
+        <div class="grid">
+
+
+
+            <div class="card">
+
+                <img src="https://tse4.mm.bing.net/th/id/OIP.Z2_QXZbjnj4-F8bYLT1y4gHaFA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                     alt="Ethiopian Wolf">
+
+
+                <div class="content">
+
+                    <h3>
+                        Ethiopian Red Wolf
+                    </h3>
+
+
+                    <p>
+                        The Ethiopian wolf is one of Ethiopia's
+                        most endangered animals.
+                    </p>
+
+
+                    <button class="card-button"
+                        onclick="showAnimal('Ethiopian Red Wolf')">
+
+                        Learn More
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="card">
+
+                <img src="https://tse2.mm.bing.net/th/id/OIP.R8403bDe3WMt8eGDxtkrTgAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                     alt="Walia Ibex">
+
+
+                <div class="content">
+
+                    <h3>
+                        Walia Ibex
+                    </h3>
+
+
+                    <p>
+                        The Walia Ibex is an endangered animal
+                        found only in Ethiopia.
+                    </p>
+
+
+                    <button class="card-button"
+                        onclick="showAnimal('Walia Ibex')">
+
+                        Learn More
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <img src="https://as2.ftcdn.net/v2/jpg/04/37/07/63/1000_F_437076341_u5pLwynu3edbBBGmmWZQkEfjp5yOXYLH.jpg"
+                     alt="Mountain Nyala">
+
+
+                <div class="content">
+
+                    <h3>
+                        Mountain Nyala
+                    </h3>
+
+
+                    <p>
+                        The Mountain Nyala is an endangered
+                        antelope found only in Ethiopia.
+                    </p>
+
+
+                    <button class="card-button"
+                        onclick="showAnimal('Mountain Nyala')">
+
+                        Learn More
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="card">
+
+                <img src="https://thumbs.dreamstime.com/b/african-wild-donkey-equus-asinus-somalicus-grazing-wildlife-park-indigenous-to-east-africa-critically-endangered-374439457.jpg"
+                     alt="Wild Donkey">
+
+
+                <div class="content">
+
+                    <h3>
+                        Wild Donkey
+                    </h3>
+
+
+                    <p>
+                        The wild donkey is an endangered species
+                        found in Ethiopia's arid regions.
+                    </p>
+
+
+                    <button class="card-button"
+                        onclick="showAnimal('Wild Donkey')">
+
+                        Learn More
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <img src="https://thumbs.dreamstime.com/b/male-gelada-theropithecus-gelada-hairy-primate-face-expression-male-gelada-theropithecus-gelada-hairy-primate-face-expression-al-361764212.jpg"
+                     alt="Gelada">
+
+
+                <div class="content">
+
+                    <h3>
+                        Gelada
+                    </h3>
+
+
+                    <p>
+                        The Gelada lives mainly in Ethiopia's
+                        highland areas.
+                    </p>
+
+
+                    <button class="card-button"
+                        onclick="showAnimal('Gelada')">
+
+                        Learn More
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="card">
+
+                <img src="https://www.thoughtco.com/thmb/onAgRak2RCAfoE2uPDezez2OIKY=/5600x3733/filters:fill(auto,1)/wild-dog---laycaon-pictus---a-young-pup-485205975-5b3b502646e0fb0037cc1d79.jpg"
+                     alt="African Wild Dog">
+
+
+                <div class="content">
+
+                    <h3>
+                        African Wild Dogs
+                    </h3>
+
+
+                    <p>
+                        African Wild Dogs face threats from habitat
+                        loss and disease.
+                    </p>
+
+
+                    <button class="card-button"
+                        onclick="showAnimal('African Wild Dogs')">
+
+                        Learn More
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="card">
+
+                <img src="https://tse4.mm.bing.net/th/id/OIP.Rne6ktCZEMk3BhwScSZ76QAAAA?r=0&rs=1&pid=ImgDetMain&o=7&rm=3"
+                     alt="Swayne's Hartebeest">
+
+
+                <div class="content">
+
+                    <h3>
+                        Swayne's Hartebeest
+                    </h3>
+
+
+                    <p>
+                        Swayne's Hartebeest is found in Ethiopia's
+                        protected grasslands.
+                    </p>
+
+
+                    <button class="card-button"
+                        onclick="showAnimal('Swaynes Hartebeest')">
+
+                        Learn More
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+
+            <div class="card">
+
+                <img src="https://animalfactguide.com/wp-content/uploads/2024/10/colobus-monkey1-725x560.jpg"
+                     alt="Black and White Colobus">
+
+
+                <div class="content">
+
+                    <h3>
+                        Black-and-white Colobus
+                    </h3>
+
+
+                    <p>
+                        The Black-and-white Colobus lives
+                        in Ethiopia's forest habitats.
+                    </p>
+
+
+                    <button class="card-button"
+                        onclick="showAnimal('Black and White Colobus')">
+
+                        Learn More
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+
+    <div id="animalModal"
+         class="modal">
+
+
+        <div class="modal-content">
+
+
+            <span class="close"
+                  onclick="closeAnimal()">
+
+                &times;
+
+            </span>
+
+
+            <h2 id="animalName"></h2>
+
+
+            <p id="animalInfo"></p>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <a class="back"
+       href="Wildlife.html">
+
+        ← Back to Wildlife
+
+    </a>
+
+
+
+    <script>
+
+
+        const animals = {
+
+
+            "Ethiopian Red Wolf":
+
+                "The Ethiopian wolf, sometimes called the Ethiopian red wolf or Ethiopian red fox, is one of Africa's most threatened carnivores. It lives mainly in high-altitude grasslands in Ethiopia, including areas around the Bale and Simien Mountains. Habitat loss, disease and conflict with human activities are major threats to its survival.",
+
+
+            "Walia Ibex":
+
+                "The Walia ibex is a wild mountain goat found only in Ethiopia. It is strongly associated with the steep cliffs of the Simien Mountains. Habitat loss, human disturbance and hunting have threatened this unique species. Conservation and protected areas are important for its survival.",
+
+
+            "Mountain Nyala":
+
+                "The mountain nyala is a large antelope found only in Ethiopia. It mainly lives in highland forests, grasslands and mountain habitats, especially in the Bale and Arsi regions. Habitat destruction and hunting are important threats to the species.",
+
+
+            "Wild Donkey":
+
+                "The African wild donkey is a rare wild relative of domestic donkeys. It lives in dry and arid environments and faces threats from habitat loss, competition with livestock and hunting. Protecting its remaining habitat is important for its survival.",
+
+
+            "Gelada":
+
+                "The gelada is a unique primate strongly associated with the Ethiopian Highlands. It spends much of its time on the ground and mainly eats grass. Habitat changes and increasing human activity can affect some gelada populations.",
+
+
+            "African Wild Dogs":
+
+                "African wild dogs are highly social predators that live in packs. Their populations are threatened by habitat loss, conflict with humans and diseases that can spread from domestic animals. Protecting habitats and reducing disease risks are important conservation measures.",
+
+
+            "Swaynes Hartebeest":
+
+                "Swayne's hartebeest is a rare antelope associated with grassland habitats in Ethiopia. Habitat loss and hunting have caused major population declines. Protected areas and conservation programs play an important role in protecting the remaining populations.",
+
+
+            "Black and White Colobus":
+
+                "Black-and-white colobus monkeys depend heavily on forest habitats. Deforestation and habitat fragmentation can reduce the areas where they can live and find food. Protecting Ethiopia's remaining forests is important for their survival."
+
+
+        };
+
+
+
+        function showAnimal(animal) {
+
+
+            document.getElementById("animalName").innerText =
+                animal;
+
+
+            document.getElementById("animalInfo").innerText =
+                animals[animal];
+
+
+            document.getElementById("animalModal").style.display =
+                "block";
+
+
+        }
+
+
+
+        function closeAnimal() {
+
+
+            document.getElementById("animalModal").style.display =
+                "none";
+
+
+        }
+
+
+
+        window.onclick = function(event) {
+
+
+            const modal =
+                document.getElementById("animalModal");
+
+
+            if (event.target === modal) {
+
+
+                modal.style.display = "none";
+
+
+            }
+
+
+        };
+
+
+
+        document.addEventListener("keydown", function(event) {
+
+
+            if (event.key === "Escape") {
+
+
+                closeAnimal();
+
+
+            }
+
+
+        });
+
+
+    </script>
+
+
 </body>
+
 </html>
+

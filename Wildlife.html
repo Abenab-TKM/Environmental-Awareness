@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="icon" type="image/jpg" href="icon.jpg">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            padding: 30px 20px;
+        }
+
+        nav {
+            max-width: 900px;
+            margin: 0 auto 25px;
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 12px;
+            padding: 12px 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: #f8fafc;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #0f766e;
+        }
+
+        .card {
+            max-width: 900px;
+            margin: auto;
+            background-color: #1e293b;
+            border: 2px solid #334155;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+        .video-section {
+    margin-top: 30px;
+    background: #0f172a;
+    border: 2px solid #0f766e;
+    border-radius: 16px;
+    padding: 25px;
+}
+
+.video-section h2 {
+    color: #38bdf8;
+    margin-bottom: 15px;
+}
+
+.video-section video {
+    width: 1000px;
+    max-height: 600px;
+    border-radius: 12px;
+    display: block;
+}
+
+.video-section p {
+    color: #94a3b8;
+    margin-top: 15px;
+    line-height: 1.6;
+}
+
+        .header {
+            border-left: 5px solid #0f766e;
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            color: white;
+        }
+
+        .header p {
+            color: #94a3b8;
+            margin-top: 8px;
+        }
+
+        .pages {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .page-box {
+            background-color: #0f172a;
+            border: 2px solid #0f766e;
+            border-radius: 15px;
+            padding: 25px;
+            transition: 0.3s;
+        }
+
+        .page-box:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+        }
+
+        .page-box h2 {
+            color: #38bdf8;
+            margin-bottom: 10px;
+        }
+
+        .page-box p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .page-box a {
+            display: inline-block;
+            background-color: #0f766e;
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+        }
+
+        .page-box a:hover {
+            background-color: #38bdf8;
+            color: #0f172a;
+        }
+
+        @media(max-width:650px) {
+            .pages {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav aria-label="Main navigation">
+        <ul>
+             <li><a href="index.html">Home</a></li>
+            <li><a href="Pollution.html">Pollution</a></li>
+            <li><a href="Solutions.html">Solutions</a></li>
+            <li><a href="Wildlife.html">Wildlife</a></li>
+            <li><a href="Conservation.html">Conservation</a></li>
+        </ul>
+    </nav>
+    <section class="video-section">
+    <h2>Wildlife & Conservation Video</h2>
+
+    <video controls>
+        <iframe width="867" height="488" src="https://www.youtube.com/embed/6Blnu31m3Z0" title="Episode 1 | The Conservation Link | A Connected Landscape" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        Your browser does not support the video tag.
+    </video>
+
+</section>
+    <div class="card">
+
+        <div class="header">
+            <h1>Wildlife & Conservation</h1>
+            <p>Learn about Ethiopia's wildlife and how we can protect it.</p>
+        </div>
+
+        <div class="pages">
+
+            <div class="page-box">
+                <h2>Endangered Animals</h2>
+                <p>
+                    Learn about animals in Ethiopia that are threatened
+                    and need protection.
+                </p>
+                <a href="endangered.html">Learn More →</a>
+            </div>
+
+            <div class="page-box">
+                <h2>Protected Areas</h2>
+                <p>
+                    Discover national parks and protected areas that
+                    provide safe habitats for wildlife.
+                </p>
+                <a href="protected.html">Learn More →</a>
+            </div>
+
+            <div class="page-box">
+                <h2>Ethiopian Wildlife</h2>
+                <p>
+                    Explore the different wildlife species found
+                    throughout Ethiopia.
+                </p>
+                <a href="ethiopian-wildlife.html">Learn More →</a>
+            </div>
+
+            <div class="page-box">
+                <h2>Endemic Animals</h2>
+                <p>
+                    Discover animals that are naturally found only
+                    in Ethiopia.
+                </p>
+                <a href="endemic.html">Learn More →</a>
+            </div>
+
+            <div class="page-box">
+                <h2>How to Protect Animals</h2>
+                <p>
+                    Learn simple ways people can help protect wildlife
+                    and their habitats.
+                </p>
+                <a href="protect-animals.html">Learn More →</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
